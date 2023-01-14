@@ -79,6 +79,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func tapStationButton(_ sender: UIButton) {
+        present(StationDetailViewController(), animated: true)
         print(sender.tag)
     }
 }
