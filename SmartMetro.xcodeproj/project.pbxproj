@@ -9,21 +9,20 @@
 /* Begin PBXBuildFile section */
 		4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535862D29729A0200B586E5 /* AppDelegate.swift */; };
 		4535863029729A0200B586E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535862F29729A0200B586E5 /* SceneDelegate.swift */; };
-		4535863229729A0200B586E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535863129729A0200B586E5 /* ViewController.swift */; };
-		4535863529729A0200B586E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4535863329729A0200B586E5 /* Main.storyboard */; };
 		4535863729729A0300B586E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4535863629729A0300B586E5 /* Assets.xcassets */; };
 		4535863A29729A0300B586E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4535863829729A0300B586E5 /* LaunchScreen.storyboard */; };
+		455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BB629729A88001A9F80 /* MainViewController.swift */; };
+		455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 455B5BBA29729BA7001A9F80 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4535862A29729A0200B586E5 /* SmartMetro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMetro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4535862D29729A0200B586E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4535862F29729A0200B586E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4535863129729A0200B586E5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4535863429729A0200B586E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4535863629729A0300B586E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4535863929729A0300B586E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4535863B29729A0300B586E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		455B5BB629729A88001A9F80 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,13 +58,20 @@
 			children = (
 				4535862D29729A0200B586E5 /* AppDelegate.swift */,
 				4535862F29729A0200B586E5 /* SceneDelegate.swift */,
-				4535863129729A0200B586E5 /* ViewController.swift */,
-				4535863329729A0200B586E5 /* Main.storyboard */,
+				455B5BB829729B5E001A9F80 /* Scenes */,
 				4535863629729A0300B586E5 /* Assets.xcassets */,
 				4535863829729A0300B586E5 /* LaunchScreen.storyboard */,
 				4535863B29729A0300B586E5 /* Info.plist */,
 			);
 			path = SmartMetro;
+			sourceTree = "<group>";
+		};
+		455B5BB829729B5E001A9F80 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				455B5BB629729A88001A9F80 /* MainViewController.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +90,9 @@
 			dependencies = (
 			);
 			name = SmartMetro;
+			packageProductDependencies = (
+				455B5BBA29729BA7001A9F80 /* SnapKit */,
+			);
 			productName = SmartMetro;
 			productReference = 4535862A29729A0200B586E5 /* SmartMetro.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +121,9 @@
 				Base,
 			);
 			mainGroup = 4535862129729A0200B586E5;
+			packageReferences = (
+				455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 4535862B29729A0200B586E5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +140,6 @@
 			files = (
 				4535863A29729A0300B586E5 /* LaunchScreen.storyboard in Resources */,
 				4535863729729A0300B586E5 /* Assets.xcassets in Resources */,
-				4535863529729A0200B586E5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4535863229729A0200B586E5 /* ViewController.swift in Sources */,
+				455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */,
 				4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */,
 				4535863029729A0200B586E5 /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +159,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4535863329729A0200B586E5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4535863429729A0200B586E5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4535863829729A0300B586E5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +296,6 @@
 				INFOPLIST_FILE = SmartMetro/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +323,6 @@
 				INFOPLIST_FILE = SmartMetro/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +360,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		455B5BBA29729BA7001A9F80 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4535862229729A0200B586E5 /* Project object */;
 }
