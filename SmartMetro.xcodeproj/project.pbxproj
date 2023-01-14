@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,9 +14,12 @@
 		455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BB629729A88001A9F80 /* MainViewController.swift */; };
 		455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 455B5BBA29729BA7001A9F80 /* SnapKit */; };
 		455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */; };
+		455B5BBF2972AA6D001A9F80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 455B5BBE2972AA6D001A9F80 /* GoogleService-Info.plist */; };
+		571021F71EE48D6AF0F92708 /* Pods_SmartMetro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01BEB23836498450BE11672A /* Pods-SmartMetro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMetro.debug.xcconfig"; path = "Target Support Files/Pods-SmartMetro/Pods-SmartMetro.debug.xcconfig"; sourceTree = "<group>"; };
 		4535862A29729A0200B586E5 /* SmartMetro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMetro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4535862D29729A0200B586E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4535862F29729A0200B586E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,6 +28,9 @@
 		4535863B29729A0300B586E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		455B5BB629729A88001A9F80 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		455B5BBE2972AA6D001A9F80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMetro.release.xcconfig"; path = "Target Support Files/Pods-SmartMetro/Pods-SmartMetro.release.xcconfig"; sourceTree = "<group>"; };
+		D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMetro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +39,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */,
+				571021F71EE48D6AF0F92708 /* Pods_SmartMetro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		107DAF35F50A89FEFA950707 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4535862129729A0200B586E5 = {
 			isa = PBXGroup;
 			children = (
 				4535862C29729A0200B586E5 /* SmartMetro */,
 				4535862B29729A0200B586E5 /* Products */,
+				B7EFFEF3236852B0A0D65718 /* Pods */,
+				107DAF35F50A89FEFA950707 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +81,7 @@
 				4535863629729A0300B586E5 /* Assets.xcassets */,
 				4535863829729A0300B586E5 /* LaunchScreen.storyboard */,
 				4535863B29729A0300B586E5 /* Info.plist */,
+				455B5BBE2972AA6D001A9F80 /* GoogleService-Info.plist */,
 			);
 			path = SmartMetro;
 			sourceTree = "<group>";
@@ -77,6 +95,16 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		B7EFFEF3236852B0A0D65718 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01BEB23836498450BE11672A /* Pods-SmartMetro.debug.xcconfig */,
+				C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -84,9 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4535863E29729A0300B586E5 /* Build configuration list for PBXNativeTarget "SmartMetro" */;
 			buildPhases = (
+				BF0C2FF1E8A4D9D14CDBEDFB /* [CP] Check Pods Manifest.lock */,
 				4535862629729A0200B586E5 /* Sources */,
 				4535862729729A0200B586E5 /* Frameworks */,
 				4535862829729A0200B586E5 /* Resources */,
+				A8A74D9BA5460D1A38836F91 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -116,7 +146,7 @@
 				};
 			};
 			buildConfigurationList = 4535862529729A0200B586E5 /* Build configuration list for PBXProject "SmartMetro" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -125,7 +155,7 @@
 			);
 			mainGroup = 4535862129729A0200B586E5;
 			packageReferences = (
-				455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
 			);
 			productRefGroup = 4535862B29729A0200B586E5 /* Products */;
 			projectDirPath = "";
@@ -143,10 +173,53 @@
 			files = (
 				4535863A29729A0300B586E5 /* LaunchScreen.storyboard in Resources */,
 				4535863729729A0300B586E5 /* Assets.xcassets in Resources */,
+				455B5BBF2972AA6D001A9F80 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A8A74D9BA5460D1A38836F91 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartMetro/Pods-SmartMetro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartMetro/Pods-SmartMetro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SmartMetro/Pods-SmartMetro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF0C2FF1E8A4D9D14CDBEDFB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartMetro-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4535862629729A0200B586E5 /* Sources */ = {
@@ -290,6 +363,7 @@
 		};
 		4535863F29729A0300B586E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01BEB23836498450BE11672A /* Pods-SmartMetro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -317,6 +391,7 @@
 		};
 		4535864029729A0300B586E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -366,7 +441,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -379,7 +454,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		455B5BBA29729BA7001A9F80 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
