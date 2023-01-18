@@ -14,7 +14,7 @@
 		455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BB629729A88001A9F80 /* MainViewController.swift */; };
 		455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 455B5BBA29729BA7001A9F80 /* SnapKit */; };
 		455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */; };
-		455B5BBF2972AA6D001A9F80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 455B5BBE2972AA6D001A9F80 /* GoogleService-Info.plist */; };
+		4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B75429767CE50033CC84 /* StationResponseModel.swift */; };
 		571021F71EE48D6AF0F92708 /* Pods_SmartMetro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		4535863B29729A0300B586E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		455B5BB629729A88001A9F80 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
-		455B5BBE2972AA6D001A9F80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4562B75429767CE50033CC84 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
 		C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMetro.release.xcconfig"; path = "Target Support Files/Pods-SmartMetro/Pods-SmartMetro.release.xcconfig"; sourceTree = "<group>"; };
 		D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMetro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,11 +77,11 @@
 			children = (
 				4535862D29729A0200B586E5 /* AppDelegate.swift */,
 				4535862F29729A0200B586E5 /* SceneDelegate.swift */,
+				455B5BC22972B4D5001A9F80 /* Data */,
 				455B5BB829729B5E001A9F80 /* Scenes */,
 				4535863629729A0300B586E5 /* Assets.xcassets */,
 				4535863829729A0300B586E5 /* LaunchScreen.storyboard */,
 				4535863B29729A0300B586E5 /* Info.plist */,
-				455B5BBE2972AA6D001A9F80 /* GoogleService-Info.plist */,
 			);
 			path = SmartMetro;
 			sourceTree = "<group>";
@@ -95,13 +95,20 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		455B5BC22972B4D5001A9F80 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4562B75429767CE50033CC84 /* StationResponseModel.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		B7EFFEF3236852B0A0D65718 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				01BEB23836498450BE11672A /* Pods-SmartMetro.debug.xcconfig */,
 				C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -155,7 +162,7 @@
 			);
 			mainGroup = 4535862129729A0200B586E5;
 			packageReferences = (
-				455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 4535862B29729A0200B586E5 /* Products */;
 			projectDirPath = "";
@@ -173,7 +180,6 @@
 			files = (
 				4535863A29729A0300B586E5 /* LaunchScreen.storyboard in Resources */,
 				4535863729729A0300B586E5 /* Assets.xcassets in Resources */,
-				455B5BBF2972AA6D001A9F80 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */,
 				455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */,
 				455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */,
 				4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */,
@@ -376,6 +383,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,9 +391,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.project.SmartMetro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -404,6 +415,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -411,9 +423,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.project.SmartMetro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -441,7 +456,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -454,7 +469,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		455B5BBA29729BA7001A9F80 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 455B5BB929729BA7001A9F80 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

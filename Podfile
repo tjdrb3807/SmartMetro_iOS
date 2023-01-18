@@ -6,5 +6,5 @@ target 'SmartMetro' do
   use_frameworks!
 
   # Pods for SmartMetro
-  pod 'Firebase/Database'
+  pod 'Alamofire'
 end

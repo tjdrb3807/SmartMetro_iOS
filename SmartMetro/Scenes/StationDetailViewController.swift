@@ -8,8 +8,11 @@
 import UIKit
 import SnapKit
 import SwiftUI
+import Alamofire
 
 final class StationDetailViewController: UIViewController {
+    private var stationCode: Int
+    private var stationInfo: [StationResponseModel.Station] = []
     private lazy var currentStationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "현재역"
@@ -40,17 +43,75 @@ final class StationDetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var northBoundLineLabel: UILabel = {
+        let label = UILabel()
+        label.text = "상행선"
+        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
+        label.textColor = .black
+        
+        return label
+    }()
+    
+    private lazy var arrivalTiemLabel: UILabel = {
+        let label = UILabel()
+        label.text = "1분 50초"
+        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
+        label.textColor = .orange
+        
+        return label
+    }()
+    
+    init(stationCode: Int) {
+        self.stationCode = stationCode
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         
-        self.setUp()
+        self.view.backgroundColor = .white
+        self.fetchData(complitionHandler: { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case let .success(result):
+                self.stationInfo = result.stationInfo
+            case let .failure(error):
+                debugPrint(error.localizedDescription)
+            }
+            
+            self.setUp()
+        })
+    }
+    
+    private func fetchData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
+        let url = "http://127.0.0.1:8080/api/v2/stations/\(stationCode)"
+        
+        AF.request(url, method: .get)
+            .responseData(completionHandler: { response in
+                switch response.result {
+                case let .success(data):
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode(StationResponseModel.self, from: data)
+                        complitionHandler(.success(result))
+                    } catch {
+                        complitionHandler(.failure(error))
+                    }
+                case let .failure(error):
+                    complitionHandler(.failure(error))
+                }
+            })
     }
 }
 
 extension StationDetailViewController {
     func setUp() {
-        [beforeStationNameLabel, currentStationNameLabel, afterStationNameLabel].forEach { view.addSubview($0) }
+        [beforeStationNameLabel, currentStationNameLabel, afterStationNameLabel, northBoundLineLabel, arrivalTiemLabel].forEach { view.addSubview($0) }
         
         beforeStationNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(50.0)
@@ -67,7 +128,19 @@ extension StationDetailViewController {
             $0.trailing.equalToSuperview().inset(10.0)
         }
         
+        northBoundLineLabel.snp.makeConstraints {
+            $0.top.equalTo(currentStationNameLabel.snp.bottom).offset(20.0)
+            $0.leading.equalTo(beforeStationNameLabel.snp.leading)
+        }
         
+        arrivalTiemLabel.snp.makeConstraints {
+            $0.top.equalTo(northBoundLineLabel.snp.top)
+            $0.leading.equalTo(northBoundLineLabel.snp.trailing).offset(10.0)
+        }
+        
+        currentStationNameLabel.text = self.stationInfo[0].stationName
+        beforeStationNameLabel.text = self.stationInfo[0].beforeStationName
+        afterStationNameLabel.text = self.stationInfo[0].afterStationName
     }
 }
 
@@ -75,14 +148,14 @@ struct StationDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Container()
     }
-    
+
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            StationDetailViewController()
+            StationDetailViewController(stationCode: 149)
         }
-        
+
         func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-        
+
         typealias UIViewControllerType = UIViewController
     }
 }

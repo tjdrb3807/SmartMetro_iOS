@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import SwiftUI
+import Alamofire
 
 final class MainViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
@@ -29,37 +30,11 @@ final class MainViewController: UIViewController {
         let x: CGFloat = ((metroMapImageView.image?.size.width ?? 0) / 2) - (scrollView.frame.width / 2)
         let y: CGFloat = ((metroMapImageView.image?.size.height ?? 0) / 2) - (scrollView.frame.height / 2)
         
-        // MARK: RxSwfit로 리팩토링
         DispatchQueue.main.async {
             scrollView.contentOffset = CGPoint.init(x: x, y: y)
         }
         
         return scrollView
-    }()
-    
-    // Sample Button
-    private lazy var button133: UIButton = {
-        let button = UIButton(frame: CGRect(x: 653.0, y: 687.0, width: 30, height: 30))
-        button.backgroundColor = .clear
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1.0
-        button.tag = 133
-        
-        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    private lazy var button134: UIButton = {
-        let button = UIButton(frame: CGRect(x: 682.0, y: 687.0, width: 25.0, height: 30))
-        button.backgroundColor = .clear
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1.0
-        button.tag = 134
-        
-        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
-        
-        return button
     }()
     
     private lazy var metroMapImageView: UIImageView = {
@@ -72,6 +47,31 @@ final class MainViewController: UIViewController {
         return imageView
     }()
     
+    // Sample Button
+    private lazy var sadangButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 653.0, y: 687.0, width: 30, height: 30))
+        button.backgroundColor = .clear
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 1.0
+        button.tag = 150 // 사당역 코드
+        
+        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var bangbaeButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 682.0, y: 687.0, width: 25.0, height: 30))
+        button.backgroundColor = .clear
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 1.0
+        button.tag = 149 // 방배역 코드
+        
+        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,8 +79,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func tapStationButton(_ sender: UIButton) {
-        present(StationDetailViewController(), animated: true)
-        print(sender.tag)
+        present(StationDetailViewController(stationCode: sender.tag), animated: true)
     }
 }
 
@@ -104,7 +103,7 @@ private extension MainViewController {
             $0.edges.equalToSuperview()
         }
         
-        [button133, button134].forEach { metroMapImageView.addSubview($0) }
+        [sadangButton, bangbaeButton].forEach { metroMapImageView.addSubview($0) }
     }
 }
 
