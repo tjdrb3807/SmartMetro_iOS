@@ -13,6 +13,8 @@ import Alamofire
 final class StationDetailViewController: UIViewController {
     private var stationCode: Int
     private var stationInfo: [StationResponseModel.Station] = []
+    private var realtimeArrivalList: [StationArrivalDataResponseModel.RealTimeArrival] = []
+    
     private lazy var currentStationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "현재역"
@@ -74,7 +76,7 @@ final class StationDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-        self.fetchData(complitionHandler: { [weak self] result in
+        self.fetchStationInfoData(complitionHandler: { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -84,11 +86,22 @@ final class StationDetailViewController: UIViewController {
                 debugPrint(error.localizedDescription)
             }
             
-            self.setUp()
+            //MARK: 이게 최선???
+            self.fetchStationArrivalData(complitionHandler: { result in
+                switch result {
+                case let .success(result):
+                    print(result)
+                    self.realtimeArrivalList = result.realtimeArrivalList
+                    print(self.realtimeArrivalList)
+                case let .failure(error):
+                    debugPrint(error.localizedDescription)
+                }
+                self.setUp()
+            })
         })
     }
     
-    private func fetchData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
+    private func fetchStationInfoData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
         let url = "http://127.0.0.1:8080/api/v2/stations/\(stationCode)"
         
         AF.request(url, method: .get)
@@ -98,6 +111,26 @@ final class StationDetailViewController: UIViewController {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(StationResponseModel.self, from: data)
+                        complitionHandler(.success(result))
+                    } catch {
+                        complitionHandler(.failure(error))
+                    }
+                case let .failure(error):
+                    complitionHandler(.failure(error))
+                }
+            })
+    }
+    
+    private func fetchStationArrivalData(complitionHandler: @escaping (Result<StationArrivalDataResponseModel, Error>) -> Void) {
+        let url = "http://swopenAPI.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/\(self.stationInfo[0].stationName)"
+        
+        AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "", method: .get)
+            .responseData(completionHandler: { response in
+                switch response.result {
+                case let .success(data):
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode(StationArrivalDataResponseModel.self, from: data)
                         complitionHandler(.success(result))
                     } catch {
                         complitionHandler(.failure(error))
@@ -141,21 +174,23 @@ extension StationDetailViewController {
         currentStationNameLabel.text = self.stationInfo[0].stationName
         beforeStationNameLabel.text = self.stationInfo[0].beforeStationName
         afterStationNameLabel.text = self.stationInfo[0].afterStationName
+        northBoundLineLabel.text = self.realtimeArrivalList[0].line
+        arrivalTiemLabel.text = self.realtimeArrivalList[0].remainTime
     }
 }
 
-struct StationDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-    }
-
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            StationDetailViewController(stationCode: 149)
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-
-        typealias UIViewControllerType = UIViewController
-    }
-}
+//struct StationDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Container()
+//    }
+//
+//    struct Container: UIViewControllerRepresentable {
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            StationDetailViewController(stationCode: 149)
+//        }
+//
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+//
+//        typealias UIViewControllerType = UIViewController
+//    }
+//}

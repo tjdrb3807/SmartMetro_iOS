@@ -15,6 +15,7 @@
 		455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 455B5BBA29729BA7001A9F80 /* SnapKit */; };
 		455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */; };
 		4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B75429767CE50033CC84 /* StationResponseModel.swift */; };
+		4562B788297923C70033CC84 /* StationArrivalDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */; };
 		571021F71EE48D6AF0F92708 /* Pods_SmartMetro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		455B5BB629729A88001A9F80 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 		4562B75429767CE50033CC84 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
+		4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDataResponseModel.swift; sourceTree = "<group>"; };
 		C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMetro.release.xcconfig"; path = "Target Support Files/Pods-SmartMetro/Pods-SmartMetro.release.xcconfig"; sourceTree = "<group>"; };
 		D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMetro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				4562B75429767CE50033CC84 /* StationResponseModel.swift */,
+				4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */,
 				4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */,
 				4535863029729A0200B586E5 /* SceneDelegate.swift in Sources */,
+				4562B788297923C70033CC84 /* StationArrivalDataResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
