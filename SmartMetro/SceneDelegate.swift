@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
         self.window?.backgroundColor = .systemBackground
         self.window?.overrideUserInterfaceStyle = .light
+        self.window?.tintColor = .black
         self.window?.makeKeyAndVisible()
     }
 }

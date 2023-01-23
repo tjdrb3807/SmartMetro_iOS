@@ -16,6 +16,13 @@
 		455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */; };
 		4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B75429767CE50033CC84 /* StationResponseModel.swift */; };
 		4562B788297923C70033CC84 /* StationArrivalDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */; };
+		4562B78A297930780033CC84 /* SettingSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B789297930780033CC84 /* SettingSectionView.swift */; };
+		4562B78D297938690033CC84 /* HorizontalSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B78C297938690033CC84 /* HorizontalSeparatorView.swift */; };
+		4562B78F29793EC00033CC84 /* StationInfoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B78E29793EC00033CC84 /* StationInfoSectionView.swift */; };
+		4562B791297AAF710033CC84 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B790297AAF710033CC84 /* UIButton+.swift */; };
+		4562B79B297EA25C0033CC84 /* ArrivalSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B79A297EA25C0033CC84 /* ArrivalSectionView.swift */; };
+		4562B79D297EA26A0033CC84 /* ArrivalDetailSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B79C297EA26A0033CC84 /* ArrivalDetailSectionView.swift */; };
+		4562B79F297EA27A0033CC84 /* ArrivalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B79E297EA27A0033CC84 /* ArrivalDataView.swift */; };
 		571021F71EE48D6AF0F92708 /* Pods_SmartMetro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +38,13 @@
 		455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 		4562B75429767CE50033CC84 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
 		4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDataResponseModel.swift; sourceTree = "<group>"; };
+		4562B789297930780033CC84 /* SettingSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSectionView.swift; sourceTree = "<group>"; };
+		4562B78C297938690033CC84 /* HorizontalSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSeparatorView.swift; sourceTree = "<group>"; };
+		4562B78E29793EC00033CC84 /* StationInfoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInfoSectionView.swift; sourceTree = "<group>"; };
+		4562B790297AAF710033CC84 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		4562B79A297EA25C0033CC84 /* ArrivalSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalSectionView.swift; sourceTree = "<group>"; };
+		4562B79C297EA26A0033CC84 /* ArrivalDetailSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalDetailSectionView.swift; sourceTree = "<group>"; };
+		4562B79E297EA27A0033CC84 /* ArrivalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalDataView.swift; sourceTree = "<group>"; };
 		C3DDA3390497D47E72E04FAB /* Pods-SmartMetro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMetro.release.xcconfig"; path = "Target Support Files/Pods-SmartMetro/Pods-SmartMetro.release.xcconfig"; sourceTree = "<group>"; };
 		D740C1FFEB42F58AF62B81A7 /* Pods_SmartMetro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMetro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -92,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				455B5BB629729A88001A9F80 /* MainViewController.swift */,
-				455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */,
+				4562B78B2979307D0033CC84 /* StationDetailView */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -104,6 +118,21 @@
 				4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		4562B78B2979307D0033CC84 /* StationDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */,
+				4562B789297930780033CC84 /* SettingSectionView.swift */,
+				4562B78E29793EC00033CC84 /* StationInfoSectionView.swift */,
+				4562B78C297938690033CC84 /* HorizontalSeparatorView.swift */,
+				4562B790297AAF710033CC84 /* UIButton+.swift */,
+				4562B79A297EA25C0033CC84 /* ArrivalSectionView.swift */,
+				4562B79C297EA26A0033CC84 /* ArrivalDetailSectionView.swift */,
+				4562B79E297EA27A0033CC84 /* ArrivalDataView.swift */,
+			);
+			path = StationDetailView;
 			sourceTree = "<group>";
 		};
 		B7EFFEF3236852B0A0D65718 /* Pods */ = {
@@ -237,9 +266,16 @@
 			files = (
 				4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */,
 				455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */,
+				4562B78D297938690033CC84 /* HorizontalSeparatorView.swift in Sources */,
+				4562B79F297EA27A0033CC84 /* ArrivalDataView.swift in Sources */,
 				455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */,
 				4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */,
+				4562B79B297EA25C0033CC84 /* ArrivalSectionView.swift in Sources */,
+				4562B791297AAF710033CC84 /* UIButton+.swift in Sources */,
+				4562B78F29793EC00033CC84 /* StationInfoSectionView.swift in Sources */,
 				4535863029729A0200B586E5 /* SceneDelegate.swift in Sources */,
+				4562B79D297EA26A0033CC84 /* ArrivalDetailSectionView.swift in Sources */,
+				4562B78A297930780033CC84 /* SettingSectionView.swift in Sources */,
 				4562B788297923C70033CC84 /* StationArrivalDataResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

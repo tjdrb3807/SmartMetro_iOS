@@ -14,11 +14,13 @@ struct StationArrivalDataResponseModel: Decodable {
         let line: String
         let remainTime: String
         let currentStation: String
+        let stationLineNumber: String
         
         enum CodingKeys: String, CodingKey {
             case line = "trainLineNm"
             case remainTime = "arvlMsg2"
             case currentStation = "arvlMsg3"
+            case stationLineNumber = "subwayId"
         }
     }
 }
