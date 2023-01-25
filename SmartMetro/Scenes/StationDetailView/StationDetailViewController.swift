@@ -21,8 +21,9 @@ final class StationDetailViewController: UIViewController {
         
         let settingSectionView = SettingSectionView(lineList: [1, 2, 3, 4, 5])
         let horizontalSeparatorView = HorizontalSeparatorView()
+        let stationInfoSectionView = StationInfoSectionView()
         
-        [settingSectionView, horizontalSeparatorView].forEach { stackView.addSubview($0) }
+        [settingSectionView, horizontalSeparatorView, stationInfoSectionView].forEach { stackView.addSubview($0) }
         
         settingSectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -31,6 +32,11 @@ final class StationDetailViewController: UIViewController {
         
         horizontalSeparatorView.snp.makeConstraints {
             $0.top.equalTo(settingSectionView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        stationInfoSectionView.snp.makeConstraints {
+            $0.top.equalTo(horizontalSeparatorView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         

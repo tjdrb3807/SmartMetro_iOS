@@ -15,22 +15,22 @@ final class StationInfoSectionView: UIView {
         label.text = "사당"
         label.textAlignment = .center
         label.textColor = .black
-        label.font = .systemFont(ofSize: 20.0, weight: .semibold)
-        label.backgroundColor = .white
-        label.layer.borderColor = UIColor.green.cgColor
-        label.layer.borderWidth = 10.0
-        label.layer.cornerRadius = 30.0
+        label.font = .systemFont(ofSize: 17.0, weight: .semibold)
+        label.layer.backgroundColor = UIColor.white.cgColor
+        label.layer.borderColor = UIColor(red: 96/255, green: 176/255, blue: 87/255, alpha: 1.0).cgColor
+        label.layer.borderWidth = 5.0
+        label.layer.cornerRadius = 22.0
         
         return label
     }()
     
     private lazy var beforeStationNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "❮ 낙성대"
+        label.text = " ❮낙성대"
         label.textAlignment = .left
         label.textColor = .white
-        label.font = .systemFont(ofSize: 17.0)
-        label.layer.backgroundColor = UIColor.green.cgColor
+        label.font = .systemFont(ofSize: 14.0)
+        label.layer.backgroundColor = UIColor(red: 96/255, green: 176/255, blue: 87/255, alpha: 1.0).cgColor
         label.layer.cornerRadius = 10.0
         
         return label
@@ -39,10 +39,10 @@ final class StationInfoSectionView: UIView {
     private lazy var afterStationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "방배 ❯"
-        label.font = .systemFont(ofSize: 17.0)
+        label.font = .systemFont(ofSize: 14.0)
         label.textAlignment = .right
         label.textColor = .white
-        label.layer.backgroundColor = UIColor.green.cgColor
+        label.layer.backgroundColor = UIColor(red: 96/255, green: 176/255, blue: 87/255, alpha: 1.0).cgColor
         label.layer.cornerRadius = 10.0
 
         return label
@@ -60,25 +60,27 @@ final class StationInfoSectionView: UIView {
 
 private extension StationInfoSectionView {
     func setUp() {
-        [currentStationNameLabel, beforeStationNameLabel, afterStationNameLabel].forEach { addSubview($0) }
+        [beforeStationNameLabel, afterStationNameLabel, currentStationNameLabel].forEach { addSubview($0) }
         
         currentStationNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16.0)
             $0.width.equalTo(170.0)
-            $0.height.equalTo(60.0)
+            $0.height.equalTo(45.0)
             $0.centerX.equalToSuperview()
         }
         
         beforeStationNameLabel.snp.makeConstraints {
             $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
             $0.leading.equalToSuperview().inset(16.0)
-            $0.width.equalTo(105.0)
+            $0.trailing.equalTo(currentStationNameLabel.snp.leading).offset(10.0)
+            $0.height.equalTo(20.0)
         }
 
         afterStationNameLabel.snp.makeConstraints {
             $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
+            $0.leading.equalTo(currentStationNameLabel.snp.trailing).offset(-10.0)
             $0.trailing.equalToSuperview().inset(16.0)
-            $0.width.equalTo(105.0)
+            $0.height.equalTo(20.0)
         }
     }
 }
