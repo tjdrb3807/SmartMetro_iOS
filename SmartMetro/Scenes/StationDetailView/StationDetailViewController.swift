@@ -18,29 +18,19 @@ final class StationDetailViewController: UIViewController {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 0.0
-    
-        let settingSectionView = SettingSectionView(frame: .zero)
-        let separatorView = HorizontalSeparatorView(frame: .zero)
-        let stationInfoSectionView = StationInfoSectionView(frame: .zero)
         
-        [settingSectionView, separatorView, stationInfoSectionView].forEach { stackView.addSubview($0) }
+        let settingSectionView = SettingSectionView(lineList: [1, 2, 3, 4, 5])
+        let horizontalSeparatorView = HorizontalSeparatorView()
+        
+        [settingSectionView, horizontalSeparatorView].forEach { stackView.addSubview($0) }
         
         settingSectionView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.height.equalTo(67.0)
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(50.0)
         }
         
-        separatorView.snp.makeConstraints {
+        horizontalSeparatorView.snp.makeConstraints {
             $0.top.equalTo(settingSectionView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        
-        stationInfoSectionView.snp.makeConstraints {
-            $0.top.equalTo(separatorView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -60,32 +50,32 @@ final class StationDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-        self.fetchStationInfoData(complitionHandler: { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case let .success(result):
-                self.stationInfo = result.stationInfo
-            case let .failure(error):
-                debugPrint(error.localizedDescription)
-            }
-            
-            //MARK: 이게 최선???
-            self.fetchStationArrivalData(complitionHandler: { result in
-                switch result {
-                case let .success(result):
-                    self.realtimeArrivalList = result.realtimeArrivalList
-//                    print(self.realtimeArrivalList)
-                case let .failure(error):
-                    debugPrint(error.localizedDescription)
-                }
-                self.setUp()
-            })
-        })
+//        self.fetchStationInfoData(complitionHandler: { [weak self] result in
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case let .success(result):
+//                self.stationInfo = result.stationInfo
+//            case let .failure(error):
+//                debugPrint(error.localizedDescription)
+//            }
+//
+//            //MARK: 이게 최선???
+//            self.fetchStationArrivalData(complitionHandler: { result in
+//                switch result {
+//                case let .success(result):
+//                    self.realtimeArrivalList = result.realtimeArrivalList
+//                case let .failure(error):
+//                    debugPrint(error.localizedDescription)
+//                }
+//                self.setUp()
+//            })
+//        })
+        self.setUp()
     }
     
     private func fetchStationInfoData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
-        let url = "http://127.0.0.1:8080/api/v2/stations/\(stationCode)"
+        let url = "http://192.168.0.8:8080/api/v2/stations/\(stationCode)"
         
         AF.request(url, method: .get)
             .responseData(completionHandler: { response in

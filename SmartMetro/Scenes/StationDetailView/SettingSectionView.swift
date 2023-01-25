@@ -10,90 +10,96 @@ import SnapKit
 import SwiftUI
 
 final class SettingSectionView: UIView {
-    private let lineList: [Int] = [2, 4, 7, 11]
+    private var lineList: [Int] // Max: 10개
+    private var spacingViewCount: Int
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 0.0
-        
-        var inset: CGFloat = 16.0
-        let buttonSize: CGFloat = 35.0
+        stackView.distribution = .fillEqually
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
+    
         for lineNumber in lineList {
             let button = UIButton()
             button.tag = lineNumber
             
+
+            //TODO: 호선 추가
             switch lineNumber {
             case 1:
-                button.tintColor = .blue
+                button.tintColor = UIColor(red: 41/255, green: 60/255, blue: 249/222, alpha: 1.0)
             case 2:
-                button.tintColor = .green
+                button.tintColor = UIColor(red: 96/255, green: 176/255, blue: 87/255, alpha: 1.0)
+            case 3:
+                button.tintColor = UIColor(red: 240/255, green: 123/255, blue: 48/255, alpha: 1.0)
             case 4:
-                button.tintColor = .red
+                button.tintColor = UIColor(red: 82/255, green: 156/255, blue: 222/255, alpha: 1.0)
+            case 5:
+                button.tintColor = UIColor(red: 127/255, green: 49/255, blue: 226/255, alpha: 1.0)
+            case 6:
+                button.tintColor = UIColor(red: 164/255, green: 86/255, blue: 37/255, alpha: 1.0)
+            case 7:
+                button.tintColor = UIColor(red: 107/255, green: 114/255, blue: 40/255, alpha: 1.0)
+            case 8:
+                button.tintColor = UIColor(red: 215/255, green: 55/255, blue: 109/255, alpha: 1.0)
+            case 9:
+                button.tintColor = UIColor(red: 220/255, green: 164/255, blue: 74/255, alpha: 1.0)
+            case 10: // 경의 중앙선
+                button.tintColor = UIColor(red: 105/255, green: 157/255, blue: 122/255, alpha: 1.0)
             default:
                 break
             }
             
-            if lineNumber == lineList[0] {
+            if lineNumber == lineList.first {
                 button.setImage(systemName: "\(lineNumber).circle.fill")
-                
-                stackView.addSubview(button)
-                button.snp.makeConstraints {
-                    $0.top.equalToSuperview().inset(16.0)
-                    $0.leading.equalToSuperview().inset(inset)
-                    $0.width.height.equalTo(buttonSize)
-                }
             } else {
                 button.setImage(systemName: "\(lineNumber).circle")
-                
-                stackView.addSubview(button)
-                button.snp.makeConstraints {
-                    $0.top.equalToSuperview().inset(16.0)
-                    $0.leading.equalToSuperview().inset(inset)
-                    $0.width.height.equalTo(buttonSize)
-                }
             }
-            inset += 40.0
+            
+            button.tag = lineNumber
+            //TODO: Button AddTarget() 구현
+            stackView.addArrangedSubview(button)
         }
         
-        let dataReloadButton = UIButton()
-        dataReloadButton.setImage(systemName: "repeat.circle")
+        if spacingViewCount > 0 {
+            for _ in 1...spacingViewCount {
+                let spacingView = UIView()
+                spacingView.backgroundColor = .white
+                stackView.addArrangedSubview(spacingView)
+            }
+        }
         
+    
+        let dataReloadButton = UIButton()
+        dataReloadButton.setImage(systemName: "arrow.triangle.2.circlepath")
+
         let popButton = UIButton()
         popButton.setImage(systemName: "xmark")
-        
-        [dataReloadButton, popButton].forEach { stackView.addSubview($0) }
-        
-        popButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16.0)
-            $0.trailing.equalToSuperview().inset(16.0)
-            $0.width.height.equalTo(buttonSize)
-        }
-        
-        dataReloadButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16.0)
-            $0.trailing.equalTo(popButton.snp.leading).offset(-5.0)
-            $0.width.height.equalTo(buttonSize)
-        }
+
+        [dataReloadButton, popButton].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.height.equalTo(67.0)
-        }
+    init(lineList: [Int]) {
+        self.lineList = lineList
+        self.spacingViewCount = 10 - lineList.count
+        super.init(frame: .zero)
+        self.setUp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private extension SettingSectionView {
+    func setUp() {
+        addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
 
@@ -104,7 +110,7 @@ struct SettingSectionView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            SettingSectionView(frame: .zero)
+            SettingSectionView(lineList: [1, 2, 3, 4, 5, 6, 7, 8, 9])
         }
         
         func updateUIView(_ uiView: UIViewType, context: Context) {}
