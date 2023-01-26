@@ -10,10 +10,13 @@ import SnapKit
 import SwiftUI
 
 final class StationInfoSectionView: UIView {
+    private let stationInfo: StationResponseModel.Station
+    
     private lazy var currentStationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "사당"
         label.textAlignment = .center
+        label.numberOfLines = 1
         label.textColor = .black
         label.font = .systemFont(ofSize: 17.0, weight: .semibold)
         label.layer.backgroundColor = UIColor.white.cgColor
@@ -26,7 +29,8 @@ final class StationInfoSectionView: UIView {
     
     private lazy var beforeStationNameLabel: UILabel = {
         let label = UILabel()
-        label.text = " ❮낙성대"
+        label.text = "❮ 방배"
+        label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = .white
         label.font = .systemFont(ofSize: 14.0)
@@ -38,7 +42,8 @@ final class StationInfoSectionView: UIView {
     
     private lazy var afterStationNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "방배 ❯"
+        label.text = "낙성대 ❯"
+        label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14.0)
         label.textAlignment = .right
         label.textColor = .white
@@ -48,9 +53,18 @@ final class StationInfoSectionView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        self.setUp()
+//    }
+    init(stationInfo: StationResponseModel.Station) {
+        self.stationInfo = stationInfo
+        super.init(frame: .zero)
+        
         self.setUp()
+        self.currentStationNameLabel.text = stationInfo.stationName
+        self.beforeStationNameLabel.text = "❮ \(stationInfo.beforeStationName)"
+        self.afterStationNameLabel.text = "\(stationInfo.afterStationName) ❯"
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +86,7 @@ private extension StationInfoSectionView {
         beforeStationNameLabel.snp.makeConstraints {
             $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
             $0.leading.equalToSuperview().inset(16.0)
-            $0.trailing.equalTo(currentStationNameLabel.snp.leading).offset(10.0)
+            $0.trailing.equalTo(currentStationNameLabel.snp.leading).offset(10)
             $0.height.equalTo(20.0)
         }
 
@@ -92,7 +106,7 @@ struct StationInfoSectionView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            StationInfoSectionView()
+            StationInfoSectionView(stationInfo: StationResponseModel.Station(stationName: "사당", stationLineNumber: 2, beforeStationName: "낙성대", afterStationName: "방배"))
         }
         
         func updateUIView(_ uiView: UIViewType, context: Context) {}
