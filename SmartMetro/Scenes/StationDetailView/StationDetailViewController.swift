@@ -19,9 +19,11 @@ final class StationDetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         
-        let settingSectionView = SettingSectionView(lineList: [1, 2, 3, 4, 5])
+        let settingSectionView = SettingSectionView(lineList: {
+            realtimeArrivalList[0].lineList.components(separatedBy: ",").map { Int($0.suffix(2))! }
+        }())
         let horizontalSeparatorView = HorizontalSeparatorView()
-        let stationInfoSectionView = StationInfoSectionView()
+        let stationInfoSectionView = StationInfoSectionView(stationInfo: stationInfo[0])
         
         [settingSectionView, horizontalSeparatorView, stationInfoSectionView].forEach { stackView.addSubview($0) }
         
@@ -56,32 +58,32 @@ final class StationDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-//        self.fetchStationInfoData(complitionHandler: { [weak self] result in
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case let .success(result):
-//                self.stationInfo = result.stationInfo
-//            case let .failure(error):
-//                debugPrint(error.localizedDescription)
-//            }
-//
-//            //MARK: 이게 최선???
-//            self.fetchStationArrivalData(complitionHandler: { result in
-//                switch result {
-//                case let .success(result):
-//                    self.realtimeArrivalList = result.realtimeArrivalList
-//                case let .failure(error):
-//                    debugPrint(error.localizedDescription)
-//                }
-//                self.setUp()
-//            })
-//        })
-        self.setUp()
+        self.fetchStationInfoData(complitionHandler: { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case let .success(result):
+                self.stationInfo = result.stationInfo
+            case let .failure(error):
+                debugPrint(error.localizedDescription)
+            }
+            //MARK: 이게 최선???
+            self.fetchStationArrivalData(complitionHandler: { result in
+                switch result {
+                case let .success(result):
+                    self.realtimeArrivalList = result.realtimeArrivalList
+                    print(self.realtimeArrivalList)
+                case let .failure(error):
+                    debugPrint(error.localizedDescription)
+                }
+                self.setUp()
+            })
+        })
     }
     
     private func fetchStationInfoData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
-        let url = "http://192.168.0.8:8080/api/v2/stations/\(stationCode)"
+//        let url = "http://192.168.0.8:8080/api/v2/stations/\(stationCode)"  // 디바이스용 URL
+        let url = "http://localhost:8080/api/v2/stations/\(stationCode)"  // 시뮬레이터용 URL
         
         AF.request(url, method: .get)
             .responseData(completionHandler: { response in
@@ -138,7 +140,7 @@ struct StationDetailView_Previews: PreviewProvider {
 
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            StationDetailViewController(stationCode: 149)
+            StationDetailViewController(stationCode: 150)
         }
 
         func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
