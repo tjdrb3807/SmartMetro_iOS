@@ -11,20 +11,38 @@ import SwiftUI
 
 final class ArrivalSectionView: UIView {
     private lazy var stackView: UIStackView = {
-        let stackview = UIStackView()
-        stackview.axis = .horizontal
-        stackview.distribution = .equalSpacing
-        stackview.spacing = 0.0
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
         
-        return stackview
+        let one = ArrivalDetailSectionView()
+        let two = ArrivalDetailSectionView()
+        let verticalSeparatorView = VerticalSeparatorView()
+        
+        [one, verticalSeparatorView, two].forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
     }()
     
     override init(frame: CGRect) {
         super .init(frame: frame)
+        self.setUp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private extension ArrivalSectionView {
+    func setUp() {
+        addSubview(stackView)
+        stackView.snp.makeConstraints { $0.edges.equalToSuperview()}
+        
+        stackView.arrangedSubviews[2].snp.makeConstraints {
+            $0.centerY.equalTo(stackView.snp.centerY)
+        }
     }
 }
 

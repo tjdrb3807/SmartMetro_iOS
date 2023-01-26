@@ -13,20 +13,25 @@ final class ArrivalDataView: UIView {
     private let destination: String
     private let realtiem: String
     
-    private lazy var destinationLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 17.0, weight: .medium)
-        label.text = destination
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+
+        let destinationLabel = UILabel()
+        destinationLabel.text = self.destination
+        destinationLabel.font = .systemFont(ofSize: 17.0, weight: .medium)
         
-        return label
-    }()
-    
-    private lazy var realtimeLable: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 17.0, weight: .medium)
-        label.text = realtiem
+        let realtimeLabel = UILabel()
+        realtimeLabel.text = self.realtiem
+        realtimeLabel.font = .systemFont(ofSize: 17.0, weight: .medium)
+        realtimeLabel.textColor = .orange
         
-        return label
+        let spacingView = UIView()
+        
+        [destinationLabel, realtimeLabel, spacingView].forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
     }()
     
     init(destination: String, realtiem: String) {
@@ -45,13 +50,18 @@ final class ArrivalDataView: UIView {
 
 private extension ArrivalDataView {
     func setUp() {
-        let stackView = UIStackView(arrangedSubviews: [destinationLabel, realtimeLable])
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 0.0
-        
         addSubview(stackView)
-        stackView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        stackView.arrangedSubviews[0].snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(16.0)
+        }
+        
+        stackView.arrangedSubviews[1].snp.makeConstraints {
+            $0.left.equalTo(stackView.arrangedSubviews[0].snp.right).offset(10.0)
+        }
     }
 }
 

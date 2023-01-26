@@ -24,8 +24,9 @@ final class StationDetailViewController: UIViewController {
         }())
         let horizontalSeparatorView = HorizontalSeparatorView()
         let stationInfoSectionView = StationInfoSectionView(stationInfo: stationInfo[0])
+        let arrivalSectionView = ArrivalSectionView()
         
-        [settingSectionView, horizontalSeparatorView, stationInfoSectionView].forEach { stackView.addSubview($0) }
+        [settingSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView].forEach { stackView.addSubview($0) }
         
         settingSectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -39,6 +40,12 @@ final class StationDetailViewController: UIViewController {
         
         stationInfoSectionView.snp.makeConstraints {
             $0.top.equalTo(horizontalSeparatorView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        
+        arrivalSectionView.snp.makeConstraints {
+            $0.top.equalTo(stationInfoSectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -82,8 +89,8 @@ final class StationDetailViewController: UIViewController {
     }
     
     private func fetchStationInfoData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
-        let url = "http://192.168.0.8:8080/api/v2/stations/\(stationCode)"  // 디바이스 용 URL
-//        let url = "http://localhost:8080/api/v2/stations/\(stationCode)"  // 시뮬레이터 용 URL
+//        let url = "http://192.168.0.8:8080/api/v2/stations/\(stationCode)"  // 디바이스 용 URL
+        let url = "http://localhost:8080/api/v2/stations/\(stationCode)"  // 시뮬레이터 용 URL
         
         AF.request(url, method: .get)
             .responseData(completionHandler: { response in
