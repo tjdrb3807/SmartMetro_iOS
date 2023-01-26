@@ -13,7 +13,7 @@ struct StationResponseModel: Decodable {
     struct Station: Decodable {
         
         let stationName: String
-        let stationLineNumber: Int
+        let stationLineNumber: String
         let beforeStationName: String
         let afterStationName: String
     }

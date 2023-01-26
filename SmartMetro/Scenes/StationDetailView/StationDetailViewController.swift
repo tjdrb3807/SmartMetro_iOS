@@ -72,10 +72,10 @@ final class StationDetailViewController: UIViewController {
                 switch result {
                 case let .success(result):
                     self.realtimeArrivalList = result.realtimeArrivalList
-                    print(self.realtimeArrivalList) //MARK: 이거 지우면 함수 실행 순서가 바뀐다.
                 case let .failure(error):
                     debugPrint(error.localizedDescription)
                 }
+                
                 self.setUp()
             })
         })
@@ -125,7 +125,6 @@ final class StationDetailViewController: UIViewController {
 
 extension StationDetailViewController {
     func setUp() {
-        
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()

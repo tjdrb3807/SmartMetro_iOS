@@ -9,7 +9,7 @@ import UIKit
 
 extension UIColor {
     //MARK: 호선 추가 필요
-    func setColor(lineNumber: Int) -> UIColor {
+    static func setColor(lineNumber: Int) -> UIColor {
         switch lineNumber {
         case 1:
             return UIColor(red: 41/255, green: 60/255, blue: 249/222, alpha: 1.0)
@@ -32,7 +32,7 @@ extension UIColor {
         case 10: // 경의 중앙선
             return UIColor(red: 105/255, green: 157/255, blue: 122/255, alpha: 1.0)
         default:
-            return UIColor()
+            return UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         }
     }
 }

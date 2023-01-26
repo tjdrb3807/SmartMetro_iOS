@@ -22,7 +22,8 @@ final class SettingSectionView: UIView {
     
         for lineNumber in lineList {
             let button = UIButton()
-            let color = UIColor().setColor(lineNumber: lineNumber)
+            let color = UIColor.setColor(lineNumber: lineNumber)
+            
             button.tintColor = color
             button.tag = lineNumber
             
@@ -32,7 +33,6 @@ final class SettingSectionView: UIView {
                 button.setImage(systemName: "\(lineNumber).circle")
             }
             
-            button.tag = lineNumber
             //TODO: Button AddTarget() 구현
             stackView.addArrangedSubview(button)
         }
