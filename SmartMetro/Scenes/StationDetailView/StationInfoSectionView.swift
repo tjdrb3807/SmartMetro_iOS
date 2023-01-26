@@ -53,10 +53,6 @@ final class StationInfoSectionView: UIView {
         return label
     }()
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        self.setUp()
-//    }
     init(stationInfo: StationResponseModel.Station) {
         self.stationInfo = stationInfo
         super.init(frame: .zero)
@@ -65,6 +61,12 @@ final class StationInfoSectionView: UIView {
         self.currentStationNameLabel.text = stationInfo.stationName
         self.beforeStationNameLabel.text = "❮ \(stationInfo.beforeStationName)"
         self.afterStationNameLabel.text = "\(stationInfo.afterStationName) ❯"
+        
+        let color = UIColor().setColor(lineNumber: self.stationInfo.stationLineNumber)
+        self.currentStationNameLabel.layer.borderColor = color.cgColor
+        self.beforeStationNameLabel.layer.backgroundColor = color.cgColor
+        self.afterStationNameLabel.layer.borderColor = color.cgColor
+        
     }
     
     required init?(coder: NSCoder) {

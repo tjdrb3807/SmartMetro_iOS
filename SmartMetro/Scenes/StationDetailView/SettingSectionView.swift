@@ -22,34 +22,9 @@ final class SettingSectionView: UIView {
     
         for lineNumber in lineList {
             let button = UIButton()
+            let color = UIColor().setColor(lineNumber: lineNumber)
+            button.tintColor = color
             button.tag = lineNumber
-            
-
-            //TODO: 호선 추가
-            switch lineNumber {
-            case 1:
-                button.tintColor = UIColor(red: 41/255, green: 60/255, blue: 249/222, alpha: 1.0)
-            case 2:
-                button.tintColor = UIColor(red: 96/255, green: 176/255, blue: 87/255, alpha: 1.0)
-            case 3:
-                button.tintColor = UIColor(red: 240/255, green: 123/255, blue: 48/255, alpha: 1.0)
-            case 4:
-                button.tintColor = UIColor(red: 82/255, green: 156/255, blue: 222/255, alpha: 1.0)
-            case 5:
-                button.tintColor = UIColor(red: 127/255, green: 49/255, blue: 226/255, alpha: 1.0)
-            case 6:
-                button.tintColor = UIColor(red: 164/255, green: 86/255, blue: 37/255, alpha: 1.0)
-            case 7:
-                button.tintColor = UIColor(red: 107/255, green: 114/255, blue: 40/255, alpha: 1.0)
-            case 8:
-                button.tintColor = UIColor(red: 215/255, green: 55/255, blue: 109/255, alpha: 1.0)
-            case 9:
-                button.tintColor = UIColor(red: 220/255, green: 164/255, blue: 74/255, alpha: 1.0)
-            case 10: // 경의 중앙선
-                button.tintColor = UIColor(red: 105/255, green: 157/255, blue: 122/255, alpha: 1.0)
-            default:
-                break
-            }
             
             if lineNumber == lineList.first {
                 button.setImage(systemName: "\(lineNumber).circle.fill")
