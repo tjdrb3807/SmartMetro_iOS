@@ -15,6 +15,7 @@ final class StationInfoSectionView: UIView {
     
     private lazy var currentStationNameLabel: UILabel = {
         let label = UILabel()
+    
         label.text = stationInfo.stationName
         label.textAlignment = .center
         label.numberOfLines = 1
@@ -22,7 +23,7 @@ final class StationInfoSectionView: UIView {
         label.font = .systemFont(ofSize: 17.0, weight: .semibold)
         label.layer.backgroundColor = UIColor.white.cgColor
         label.layer.borderWidth = 5.0
-        label.layer.cornerRadius = 22.0
+        label.layer.cornerRadius = 25.0
         label.layer.borderColor = UIColor.setColor(lineNumber: lineNumber).cgColor
         
         return label
@@ -30,26 +31,30 @@ final class StationInfoSectionView: UIView {
     
     private lazy var beforeStationNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "❮ \(stationInfo.beforeStationName)"
+        
+        label.text = " ❮ \(stationInfo.beforeStationName)"
         label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = .white
         label.font = .systemFont(ofSize: 14.0)
-        label.layer.cornerRadius = 10.0
         label.layer.backgroundColor = UIColor.setColor(lineNumber: lineNumber).cgColor
+        label.layer.cornerRadius = 10.0
+        label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         return label
     }()
     
     private lazy var afterStationNameLabel: UILabel = {
         let label = UILabel()
+        
         label.text = "\(stationInfo.afterStationName) ❯"
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14.0)
         label.textAlignment = .right
         label.textColor = .white
-        label.layer.cornerRadius = 10.0
         label.layer.backgroundColor = UIColor.setColor(lineNumber: lineNumber).cgColor
+        label.layer.cornerRadius = 10.0
+        label.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
 
         return label
     }()
@@ -71,25 +76,22 @@ private extension StationInfoSectionView {
     func setUp() {
         [beforeStationNameLabel, afterStationNameLabel, currentStationNameLabel].forEach { addSubview($0) }
         
-        beforeStationNameLabel.snp.makeConstraints {
-            $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
-            $0.leading.equalToSuperview().inset(16.0)
-            $0.trailing.equalTo(currentStationNameLabel.snp.leading).offset(10)
-            $0.height.equalTo(20.0)
-        }
-    
-        afterStationNameLabel.snp.makeConstraints {
-            $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
-            $0.leading.equalTo(currentStationNameLabel.snp.trailing).offset(-10.0)
-            $0.trailing.equalToSuperview().inset(16.0)
-            $0.height.equalTo(20.0)
+        currentStationNameLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(170.0)
+            $0.height.equalTo(50.0)
         }
         
-        currentStationNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16.0)
-            $0.width.equalTo(170.0)
-            $0.height.equalTo(45.0)
-            $0.centerX.equalToSuperview()
+        beforeStationNameLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(currentStationNameLabel.snp.leading).offset(2.0)
+            $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
+        }
+        
+        afterStationNameLabel.snp.makeConstraints {
+            $0.leading.equalTo(currentStationNameLabel.snp.trailing).offset(-2.0)
+            $0.trailing.equalToSuperview()
+            $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
         }
     }
 }

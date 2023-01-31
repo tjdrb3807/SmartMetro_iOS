@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 final class HorizontalSeparatorView: UIView {
     private lazy var separator: UIView = {

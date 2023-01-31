@@ -17,19 +17,20 @@ final class ArrivalDataView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
+        stackView.alignment = .center
 
         let destinationLabel = UILabel()
-        destinationLabel.text = self.destination
-        destinationLabel.font = .systemFont(ofSize: 17.0, weight: .medium)
+        destinationLabel.text = self.destination + "  "
+        destinationLabel.font = .systemFont(ofSize: 15.0, weight: .medium)
         
         let realtimeLabel = UILabel()
-        realtimeLabel.text = self.realtiem
-        realtimeLabel.font = .systemFont(ofSize: 17.0, weight: .medium)
+        realtimeLabel.text = self.realtiem + "  "
+        realtimeLabel.font = .systemFont(ofSize: 15.0, weight: .medium)
         realtimeLabel.textColor = .orange
         
         let spacingView = UIView()
         
-        [destinationLabel, realtimeLabel, spacingView].forEach { stackView.addArrangedSubview($0) }
+        [destinationLabel, realtimeLabel].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
     }()
@@ -52,16 +53,13 @@ private extension ArrivalDataView {
     func setUp() {
         addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(3.0)
         }
         
-        stackView.arrangedSubviews[0].snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16.0)
-        }
-        
-        stackView.arrangedSubviews[1].snp.makeConstraints {
-            $0.left.equalTo(stackView.arrangedSubviews[0].snp.right).offset(10.0)
-        }
+        stackView.arrangedSubviews[0].setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        stackView.arrangedSubviews[1].setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 }
 

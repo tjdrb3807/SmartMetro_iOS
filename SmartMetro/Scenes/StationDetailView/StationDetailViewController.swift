@@ -18,36 +18,23 @@ final class StationDetailViewController: UIViewController {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.layoutMargins = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 0.0, right: 16.0)
+        stackView.isLayoutMarginsRelativeArrangement = true
         
-        let settingSectionView = SettingSectionView(lineList: {
+        let controlSectionView = ControlSectionView(lineList: {
             realtimeArrivalList[0].lineList.components(separatedBy: ",").map { Int($0.suffix(2))! }
         }())
         let horizontalSeparatorView = HorizontalSeparatorView()
         let stationInfoSectionView = StationInfoSectionView(stationInfo: stationInfo[0])
         let arrivalSectionView = ArrivalSectionView()
+        let spacingView = UIView()
+
+        [controlSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView, spacingView].forEach { stackView.addArrangedSubview($0) }
         
-        [settingSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView].forEach { stackView.addSubview($0) }
-        
-        settingSectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(50.0)
-        }
-        
-        horizontalSeparatorView.snp.makeConstraints {
-            $0.top.equalTo(settingSectionView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        
-        stationInfoSectionView.snp.makeConstraints {
-            $0.top.equalTo(horizontalSeparatorView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(80)
-        }
-        
-        arrivalSectionView.snp.makeConstraints {
-            $0.top.equalTo(stationInfoSectionView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
+        stackView.setCustomSpacing(8.0, after: controlSectionView)
+        stackView.setCustomSpacing(8.0, after: horizontalSeparatorView)
+        stackView.setCustomSpacing(8.0, after: stationInfoSectionView)
         
         return stackView
     }()
@@ -81,6 +68,8 @@ final class StationDetailViewController: UIViewController {
                     self.realtimeArrivalList = result.realtimeArrivalList
                 case let .failure(error):
                     debugPrint(error.localizedDescription)
+                    print(result)
+                    print("여기가 문제?")
                 }
                 
                 self.setUp()
@@ -102,6 +91,7 @@ final class StationDetailViewController: UIViewController {
                         complitionHandler(.success(result))
                     } catch {
                         complitionHandler(.failure(error))
+                        print(error.localizedDescription)
                     }
                 case let .failure(error):
                     complitionHandler(.failure(error))
@@ -110,7 +100,7 @@ final class StationDetailViewController: UIViewController {
     }
     
     private func fetchStationArrivalData(complitionHandler: @escaping (Result<StationArrivalDataResponseModel, Error>) -> Void) {
-        let url = "http://swopenAPI.seoul.go.kr/api/subway/584c557a7a746a64313238637a596343/json/realtimeStationArrival/0/5/\(self.stationInfo[0].stationName)"
+        let url = "http://swopenAPI.seoul.go.kr/api/subway/584c557a7a746a64313238637a596343/json/realtimeStationArrival/0/1/\(self.stationInfo[0].stationName)"
         
         AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "", method: .get)
             .responseData(completionHandler: { response in
@@ -135,6 +125,18 @@ extension StationDetailViewController {
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        stackView.arrangedSubviews[0].snp.makeConstraints {
+            $0.height.equalTo(30.0)
+        }
+        
+        stackView.arrangedSubviews[2].snp.makeConstraints {
+            $0.height.equalTo(50.0)
+        }
+        
+        stackView.arrangedSubviews[3].snp.makeConstraints {
+            $0.height.equalTo(40.0)
         }
     }
 }

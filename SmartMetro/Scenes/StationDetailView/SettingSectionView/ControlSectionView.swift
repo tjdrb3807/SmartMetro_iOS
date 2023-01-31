@@ -1,5 +1,5 @@
 //
-//  SettingSectionView.swift
+//  ControlSectionView.swift
 //  SmartMetro
 //
 //  Created by 전성규 on 2023/01/19.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-final class SettingSectionView: UIView {
+final class ControlSectionView: UIView {
     private var lineList: [Int] // Max: 10개
     private var spacingViewCount: Int
     
@@ -17,8 +17,6 @@ final class SettingSectionView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
     
         for lineNumber in lineList {
             let button = UIButton()
@@ -69,7 +67,7 @@ final class SettingSectionView: UIView {
     }
 }
 
-private extension SettingSectionView {
+private extension ControlSectionView {
     func setUp() {
         addSubview(stackView)
         stackView.snp.makeConstraints {
@@ -78,14 +76,14 @@ private extension SettingSectionView {
     }
 }
 
-struct SettingSectionView_Previews: PreviewProvider {
+struct ControlSectionView_Previews: PreviewProvider {
     static var previews: some View {
         Container()
     }
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            SettingSectionView(lineList: [1, 2, 3, 4, 5, 6, 7, 8, 9])
+            ControlSectionView(lineList: [1, 2, 3, 4, 5, 6, 7, 8, 9])
         }
         
         func updateUIView(_ uiView: UIViewType, context: Context) {}
