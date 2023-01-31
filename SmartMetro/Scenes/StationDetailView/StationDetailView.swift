@@ -1,5 +1,5 @@
 //
-//  StationDetailViewController.swift
+//  StationDetailView.swift
 //  SmartMetro
 //
 //  Created by 전성규 on 2023/01/14.
@@ -10,8 +10,8 @@ import SnapKit
 import SwiftUI
 import Alamofire
 
-final class StationDetailViewController: UIViewController {
-    private var stationCode: Int
+final class StationDetailView: UIView {
+    var stationCode: Int
     private var stationInfo: [StationResponseModel.Station] = []
     private var realtimeArrivalList: [StationArrivalDataResponseModel.RealTimeArrival] = []
     
@@ -40,18 +40,11 @@ final class StationDetailViewController: UIViewController {
     }()
     
     init(stationCode: Int) {
+        print("CALL VIEW: StationDetailView")
         self.stationCode = stationCode
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        super.init(frame: .zero)
         
-        self.view.backgroundColor = .white
+        self.backgroundColor = .white
         self.fetchStationInfoData(complitionHandler: { [weak self] result in
             guard let self = self else { return }
 
@@ -75,6 +68,10 @@ final class StationDetailViewController: UIViewController {
                 self.setUp()
             })
         })
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func fetchStationInfoData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
@@ -120,9 +117,9 @@ final class StationDetailViewController: UIViewController {
     }
 }
 
-extension StationDetailViewController {
+extension StationDetailView {
     func setUp() {
-        view.addSubview(stackView)
+        addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -146,13 +143,13 @@ struct StationDetailView_Previews: PreviewProvider {
         Container()
     }
 
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            StationDetailViewController(stationCode: 150)
+    struct Container: UIViewRepresentable {
+        func makeUIView(context: Context) -> UIView {
+            StationDetailView(stationCode: 149)
         }
+        
+        func updateUIView(_ uiView: UIView, context: Context) {}
 
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-
-        typealias UIViewControllerType = UIViewController
+        typealias UIViewType = UIView
     }
 }

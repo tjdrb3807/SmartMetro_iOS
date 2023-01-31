@@ -40,9 +40,11 @@ final class MainViewController: UIViewController {
     private lazy var metroMapImageView: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(imageLiteralResourceName: "img_metro")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapImageView(_:)))
         
         imageView.image = image
-        imageView.isUserInteractionEnabled = true  // 이거 왜 작동하는지 공부해야됨!!!
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
@@ -74,12 +76,37 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setUp()
     }
     
     @objc func tapStationButton(_ sender: UIButton) {
-        present(StationDetailViewController(stationCode: sender.tag), animated: true)
+        let view = view.viewWithTag(1)
+        if view == nil {
+            let stationDetailView = StationDetailView(stationCode: sender.tag)
+            self.view.addSubview(stationDetailView)
+            stationDetailView.tag = 1
+            stationDetailView.snp.makeConstraints {
+                $0.width.equalToSuperview()
+                $0.bottom.equalToSuperview()
+            }
+        } else {
+            view?.removeFromSuperview() //View를 지우고 새로 그린다???
+            
+            let stationDetailView = StationDetailView(stationCode: sender.tag)
+            self.view.addSubview(stationDetailView)
+            stationDetailView.tag = 1
+            stationDetailView.snp.makeConstraints {
+                $0.width.equalToSuperview()
+                $0.bottom.equalToSuperview()
+            }
+        }
+    }
+    
+    @objc func tapImageView(_ sender: UIImageView) {
+        let view = view.viewWithTag(1)
+        if view != nil {
+            view?.removeFromSuperview()
+        }
     }
 }
 
