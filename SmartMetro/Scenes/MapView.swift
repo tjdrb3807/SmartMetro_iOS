@@ -70,7 +70,6 @@ final class MapView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setUp()
-        self.backgroundColor = .red
     }
     
     required init?(coder: NSCoder) {
