@@ -11,26 +11,28 @@ import SwiftUI
 import Alamofire
 
 final class StationDetailView: UIView {
-    var stationCode: Int
-    private var stationInfo: [StationResponseModel.Station] = []
-    private var realtimeArrivalList: [StationArrivalDataResponseModel.RealTimeArrival] = []
+    private var stationCode: Int
+    private var stationInfo: [StationInfoData.Station] = []
+    private var realtimeArrivalList: [ArrivalData.RealTimeArrival] = []
+    private var stationLineInfoDataList: [StationLineInfoData] = []
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
+        
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.layoutMargins = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 0.0, right: 16.0)
         stackView.isLayoutMarginsRelativeArrangement = true
         
-        let controlSectionView = ControlSectionView(lineList: {
-            realtimeArrivalList[0].lineList.components(separatedBy: ",").map { Int($0.suffix(2))! }
-        }())
+        let controlSectionView = ControlSectionView(lineList: stationLineInfoDataList)
+        controlSectionView.tag = 100
         let horizontalSeparatorView = HorizontalSeparatorView()
         let stationInfoSectionView = StationInfoSectionView(stationInfo: stationInfo[0])
         let arrivalSectionView = ArrivalSectionView()
         let spacingView = UIView()
 
         [controlSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView, spacingView].forEach { stackView.addArrangedSubview($0) }
+        
         
         stackView.setCustomSpacing(8.0, after: controlSectionView)
         stackView.setCustomSpacing(8.0, after: horizontalSeparatorView)
@@ -40,7 +42,6 @@ final class StationDetailView: UIView {
     }()
     
     init(stationCode: Int) {
-        print("CALL VIEW: StationDetailView")
         self.stationCode = stationCode
         super.init(frame: .zero)
         
@@ -59,22 +60,28 @@ final class StationDetailView: UIView {
                 switch result {
                 case let .success(result):
                     self.realtimeArrivalList = result.realtimeArrivalList
+                    self.saveData()
                 case let .failure(error):
                     debugPrint(error.localizedDescription)
                     print(result)
                     print("여기가 문제?")
                 }
-                
                 self.setUp()
             })
         })
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(tapLineButton(_:)),
+                                               name: NSNotification.Name("tapLineButton"),
+                                               object: nil)
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func fetchStationInfoData(complitionHandler: @escaping (Result<StationResponseModel, Error>) -> Void) {
+    private func fetchStationInfoData(complitionHandler: @escaping (Result<StationInfoData, Error>) -> Void) {
 //        let url = "http://192.168.0.8:8080/api/v2/stations/\(stationCode)"  // 디바이스 용 URL
         let url = "http://localhost:8080/api/v2/stations/\(stationCode)"  // 시뮬레이터 용 URL
         
@@ -84,7 +91,7 @@ final class StationDetailView: UIView {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(StationResponseModel.self, from: data)
+                        let result = try decoder.decode(StationInfoData.self, from: data)
                         complitionHandler(.success(result))
                     } catch {
                         complitionHandler(.failure(error))
@@ -96,7 +103,7 @@ final class StationDetailView: UIView {
             })
     }
     
-    private func fetchStationArrivalData(complitionHandler: @escaping (Result<StationArrivalDataResponseModel, Error>) -> Void) {
+    private func fetchStationArrivalData(complitionHandler: @escaping (Result<ArrivalData, Error>) -> Void) {
         let url = "http://swopenAPI.seoul.go.kr/api/subway/584c557a7a746a64313238637a596343/json/realtimeStationArrival/0/1/\(self.stationInfo[0].stationName)"
         
         AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "", method: .get)
@@ -105,7 +112,7 @@ final class StationDetailView: UIView {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(StationArrivalDataResponseModel.self, from: data)
+                        let result = try decoder.decode(ArrivalData.self, from: data)
                         complitionHandler(.success(result))
                     } catch {
                         complitionHandler(.failure(error))
@@ -114,6 +121,26 @@ final class StationDetailView: UIView {
                     complitionHandler(.failure(error))
                 }
             })
+    }
+    
+    private func saveData() {
+        let list: [Int] = self.realtimeArrivalList[0].lineList.components(separatedBy: ",").map { Int($0.suffix(2))! }
+        var isChecked: Bool = true
+        
+        for lineNumber in list {
+            let data = StationLineInfoData(lineNumber: lineNumber, isChecked: isChecked)
+            self.stationLineInfoDataList.append(data)
+            isChecked = false
+        }
+    }
+    
+    @objc private func tapLineButton(_ notification: Notification) {
+        guard let data = notification.object as? [StationLineInfoData] else { return }
+        self.stationLineInfoDataList = data
+        stackView.viewWithTag(100)?.removeFromSuperview()
+        let controlSectionView = ControlSectionView(lineList: stationLineInfoDataList)
+        stackView.addArrangedSubview(controlSectionView)
+        
     }
 }
 
@@ -145,7 +172,7 @@ struct StationDetailView_Previews: PreviewProvider {
 
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            StationDetailView(stationCode: 149)
+            StationDetailView(stationCode: 150)
         }
         
         func updateUIView(_ uiView: UIView, context: Context) {}

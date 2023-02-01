@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4509506C2989429800CEF454 /* StationLineInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509506B2989429800CEF454 /* StationLineInfoData.swift */; };
+		4509506E298A5B0E00CEF454 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509506D298A5B0E00CEF454 /* MapView.swift */; };
+		45095070298A776900CEF454 /* TotalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509506F298A776900CEF454 /* TotalData.swift */; };
 		4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535862D29729A0200B586E5 /* AppDelegate.swift */; };
 		4535863029729A0200B586E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535862F29729A0200B586E5 /* SceneDelegate.swift */; };
 		4535863729729A0300B586E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4535863629729A0300B586E5 /* Assets.xcassets */; };
@@ -15,8 +18,8 @@
 		455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BB629729A88001A9F80 /* MainViewController.swift */; };
 		455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 455B5BBA29729BA7001A9F80 /* SnapKit */; };
 		455B5BBD2972A04A001A9F80 /* StationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailView.swift */; };
-		4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B75429767CE50033CC84 /* StationResponseModel.swift */; };
-		4562B788297923C70033CC84 /* StationArrivalDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */; };
+		4562B75529767CE50033CC84 /* StationInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B75429767CE50033CC84 /* StationInfoData.swift */; };
+		4562B788297923C70033CC84 /* ArrivalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B787297923C70033CC84 /* ArrivalData.swift */; };
 		4562B78A297930780033CC84 /* ControlSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B789297930780033CC84 /* ControlSectionView.swift */; };
 		4562B78D297938690033CC84 /* HorizontalSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B78C297938690033CC84 /* HorizontalSeparatorView.swift */; };
 		4562B78F29793EC00033CC84 /* StationInfoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B78E29793EC00033CC84 /* StationInfoSectionView.swift */; };
@@ -31,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		01BEB23836498450BE11672A /* Pods-SmartMetro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMetro.debug.xcconfig"; path = "Target Support Files/Pods-SmartMetro/Pods-SmartMetro.debug.xcconfig"; sourceTree = "<group>"; };
+		4509506B2989429800CEF454 /* StationLineInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationLineInfoData.swift; sourceTree = "<group>"; };
+		4509506D298A5B0E00CEF454 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		4509506F298A776900CEF454 /* TotalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalData.swift; sourceTree = "<group>"; };
 		4535862A29729A0200B586E5 /* SmartMetro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMetro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4535862D29729A0200B586E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4535862F29729A0200B586E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,8 +46,8 @@
 		453F30A3298540E900231488 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		455B5BB629729A88001A9F80 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		455B5BBC2972A04A001A9F80 /* StationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailView.swift; sourceTree = "<group>"; };
-		4562B75429767CE50033CC84 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
-		4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationArrivalDataResponseModel.swift; sourceTree = "<group>"; };
+		4562B75429767CE50033CC84 /* StationInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInfoData.swift; sourceTree = "<group>"; };
+		4562B787297923C70033CC84 /* ArrivalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalData.swift; sourceTree = "<group>"; };
 		4562B789297930780033CC84 /* ControlSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlSectionView.swift; sourceTree = "<group>"; };
 		4562B78C297938690033CC84 /* HorizontalSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSeparatorView.swift; sourceTree = "<group>"; };
 		4562B78E29793EC00033CC84 /* StationInfoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInfoSectionView.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				455B5BB629729A88001A9F80 /* MainViewController.swift */,
+				4509506D298A5B0E00CEF454 /* MapView.swift */,
 				4562B78B2979307D0033CC84 /* StationDetailView */,
 			);
 			path = Scenes;
@@ -149,8 +156,10 @@
 		455B5BC22972B4D5001A9F80 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4562B787297923C70033CC84 /* StationArrivalDataResponseModel.swift */,
-				4562B75429767CE50033CC84 /* StationResponseModel.swift */,
+				4562B787297923C70033CC84 /* ArrivalData.swift */,
+				4562B75429767CE50033CC84 /* StationInfoData.swift */,
+				4509506B2989429800CEF454 /* StationLineInfoData.swift */,
+				4509506F298A776900CEF454 /* TotalData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -297,21 +306,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4562B75529767CE50033CC84 /* StationResponseModel.swift in Sources */,
+				4562B75529767CE50033CC84 /* StationInfoData.swift in Sources */,
 				455B5BBD2972A04A001A9F80 /* StationDetailView.swift in Sources */,
 				45FDA7EC2982AABE0095AC97 /* VerticalSeparatorView.swift in Sources */,
 				4562B78D297938690033CC84 /* HorizontalSeparatorView.swift in Sources */,
 				4580306529839D95005E161E /* ArrivalSectionView.swift in Sources */,
 				4562B79F297EA27A0033CC84 /* ArrivalDataView.swift in Sources */,
 				455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */,
+				4509506E298A5B0E00CEF454 /* MapView.swift in Sources */,
 				4535862E29729A0200B586E5 /* AppDelegate.swift in Sources */,
 				4562B791297AAF710033CC84 /* UIButton+.swift in Sources */,
 				4562B78F29793EC00033CC84 /* StationInfoSectionView.swift in Sources */,
 				4535863029729A0200B586E5 /* SceneDelegate.swift in Sources */,
+				45095070298A776900CEF454 /* TotalData.swift in Sources */,
 				4562B78A297930780033CC84 /* ControlSectionView.swift in Sources */,
 				458030692983B959005E161E /* ArrivalDetailView.swift in Sources */,
-				4562B788297923C70033CC84 /* StationArrivalDataResponseModel.swift in Sources */,
+				4562B788297923C70033CC84 /* ArrivalData.swift in Sources */,
 				453F30A4298540E900231488 /* PaddingLabel.swift in Sources */,
+				4509506C2989429800CEF454 /* StationLineInfoData.swift in Sources */,
 				45FDA7EA29827E810095AC97 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
