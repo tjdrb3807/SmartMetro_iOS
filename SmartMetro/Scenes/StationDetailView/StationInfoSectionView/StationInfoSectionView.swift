@@ -10,7 +10,7 @@ import SnapKit
 import SwiftUI
 
 final class StationInfoSectionView: UIView {
-    private let stationInfo: StationResponseModel.Station
+    private let stationInfo: StationInfoData.Station
     private let lineNumber: Int
     
     private lazy var currentStationNameLabel: UILabel = {
@@ -59,7 +59,7 @@ final class StationInfoSectionView: UIView {
         return label
     }()
     
-    init(stationInfo: StationResponseModel.Station) {
+    init(stationInfo: StationInfoData.Station) {
         self.stationInfo = stationInfo
         self.lineNumber = Int(stationInfo.stationLineNumber.suffix(2))!
         super.init(frame: .zero)
@@ -103,7 +103,7 @@ struct StationInfoSectionView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            StationInfoSectionView(stationInfo: StationResponseModel.Station(stationName: "사당", stationLineNumber: "1002", beforeStationName: "낙성대", afterStationName: "방배"))
+            StationInfoSectionView(stationInfo: StationInfoData.Station(stationName: "사당", stationLineNumber: "1002", beforeStationName: "낙성대", afterStationName: "방배"))
         }
         
         func updateUIView(_ uiView: UIViewType, context: Context) {}

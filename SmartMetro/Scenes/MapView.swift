@@ -53,6 +53,7 @@ final class MapView: UIView {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1.0
         button.tag = 150 // 사당역 코드
+        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         
         return button
     }()
@@ -63,6 +64,7 @@ final class MapView: UIView {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1.0
         button.tag = 149 // 방배역 코드
+        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         
         return button
     }()
@@ -74,6 +76,11 @@ final class MapView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func tapStationButton(_ sender: UIButton) {
+        NotificationCenter.default.post(name: NSNotification.Name("tapStationButton"),
+                                        object: sender.tag)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  StationArrivalDataResponseModel.swift
+//  ArrivalData.swift
 //  SmartMetro
 //
 //  Created by 전성규 on 2023/01/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StationArrivalDataResponseModel: Decodable {
+struct ArrivalData: Decodable {
     var realtimeArrivalList: [RealTimeArrival] = []
     
     struct RealTimeArrival: Decodable {
