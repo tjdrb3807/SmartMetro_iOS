@@ -49,6 +49,7 @@ final class ControlSectionView: UIView {
 
         let popButton = UIButton()
         popButton.setImage(systemName: "xmark")
+        popButton.addTarget(self, action: #selector(tapPopButton(_:)), for: .touchUpInside)
 
         [dataReloadButton, popButton].forEach { stackView.addArrangedSubview($0) }
         return stackView
@@ -68,6 +69,11 @@ final class ControlSectionView: UIView {
     @objc private func tapLineButton(_ sender: UIButton) {
         NotificationCenter.default.post(name: NSNotification.Name("tapLineButton"),
                                         object: sender.tag)
+    }
+    
+    @objc private func tapPopButton(_ sender: UIButton) {
+        NotificationCenter.default.post(name: NSNotification.Name("tapPopButton"),
+                                        object: nil)
     }
 }
 

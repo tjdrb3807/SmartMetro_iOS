@@ -13,7 +13,7 @@ import Alamofire
 final class MainViewController: UIViewController {
     
     private lazy var mapView = MapView()
-    private var station: StationDetailView?
+    private var stationDetailViewController: StationDetailViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,11 @@ final class MainViewController: UIViewController {
                                                selector: #selector(tapLineButton(_:)),
                                                name: NSNotification.Name("tapLineButton"),
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(popStationDetailVC(_:)),
+                                               name: NSNotification.Name("tapPopButton"),
+                                               object: nil)
     }
     
 //    private func presentStationDetailViewController(stationCode: Int) {
@@ -38,10 +43,10 @@ final class MainViewController: UIViewController {
 //    }
     
     private func presentStationDetailViewController(stationCode: Int) {
-        self.station = StationDetailView(stationCode: stationCode)
-        station?.modalPresentationStyle = .formSheet
-        station?.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
-        self.present(station ?? UIViewController(), animated: false, completion: nil)
+        self.stationDetailViewController = StationDetailViewController(stationCode: stationCode)
+        stationDetailViewController?.modalPresentationStyle = .formSheet
+        stationDetailViewController?.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
+        self.present(stationDetailViewController ?? UIViewController(), animated: false, completion: nil)
     }
     
     @objc private func tapStationButton(_ notification: Notification) {
@@ -52,8 +57,12 @@ final class MainViewController: UIViewController {
     @objc private func tapLineButton(_ notification: Notification) {
         guard let stationCode = notification.object as? Int else { return }
         
-        self.station?.dismiss(animated: false)
+        self.stationDetailViewController?.dismiss(animated: false)
         self.presentStationDetailViewController(stationCode: stationCode)
+    }
+    
+    @objc private func popStationDetailVC(_ notification: Notification) {
+        self.stationDetailViewController?.dismiss(animated: true)
     }
 }
 

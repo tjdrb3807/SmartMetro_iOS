@@ -1,5 +1,5 @@
 //
-//  StationDetailView.swift
+//  StationDetailViewController.swift
 //  SmartMetro
 //
 //  Created by 전성규 on 2023/01/14.
@@ -10,7 +10,7 @@ import SnapKit
 import SwiftUI
 import Alamofire
 
-final class StationDetailView: UIViewController {
+final class StationDetailViewController: UIViewController {
     private var stationCode: Int
     private var stationInfo: [StationInfoData.Station] = []
     private var realtimeArrivalList: [ArrivalData.RealTimeArrival] = []
@@ -143,7 +143,7 @@ final class StationDetailView: UIViewController {
 //    }
 }
 
-extension StationDetailView {
+extension StationDetailViewController {
     func setUp() {
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
@@ -171,7 +171,7 @@ struct StationDetailView_Previews: PreviewProvider {
 
     struct Container: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            StationDetailView(stationCode: 150)
+            StationDetailViewController(stationCode: 150)
         }
         
         func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
