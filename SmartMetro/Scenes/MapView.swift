@@ -52,7 +52,7 @@ final class MapView: UIView {
         button.backgroundColor = .clear
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1.0
-        button.tag = 150 // 사당역 코드
+        button.tag = 226 // 사당역 코드
         button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         
         return button
@@ -63,11 +63,23 @@ final class MapView: UIView {
         button.backgroundColor = .clear
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1.0
-        button.tag = 149 // 방배역 코드
+        button.tag = 225 // 방배역 코드
         button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         
         return button
     }()
+    
+    private lazy var leeSuButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 655.0, y: 640.0, width: 30.0, height: 30))
+        button.backgroundColor = .clear
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 1.0
+        button.tag = 432 // 방배역 코드
+        button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -102,7 +114,7 @@ private extension MapView {
             $0.edges.equalToSuperview()
         }
 
-        [sadangButton, bangbaeButton].forEach { metroMapImageView.addSubview($0) }
+        [sadangButton, bangbaeButton, leeSuButton].forEach { metroMapImageView.addSubview($0) }
     }
 }
 

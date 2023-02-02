@@ -11,7 +11,7 @@ import SwiftUI
 
 final class StationInfoSectionView: UIView {
     private let stationInfo: StationInfoData.Station
-    private let lineNumber: Int
+    private var lineNumber: Int
     
     private lazy var currentStationNameLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +24,7 @@ final class StationInfoSectionView: UIView {
         label.layer.backgroundColor = UIColor.white.cgColor
         label.layer.borderWidth = 5.0
         label.layer.cornerRadius = 25.0
-        label.layer.borderColor = UIColor.setColor(lineNumber: lineNumber).cgColor
+        label.layer.borderColor = UIColor.setColor(lineNumber: self.lineNumber).cgColor
         
         return label
     }()
@@ -37,7 +37,7 @@ final class StationInfoSectionView: UIView {
         label.textAlignment = .left
         label.textColor = .white
         label.font = .systemFont(ofSize: 14.0)
-        label.layer.backgroundColor = UIColor.setColor(lineNumber: lineNumber).cgColor
+        label.layer.backgroundColor = UIColor.setColor(lineNumber: self.lineNumber).cgColor
         label.layer.cornerRadius = 10.0
         label.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
@@ -52,7 +52,7 @@ final class StationInfoSectionView: UIView {
         label.font = .systemFont(ofSize: 14.0)
         label.textAlignment = .right
         label.textColor = .white
-        label.layer.backgroundColor = UIColor.setColor(lineNumber: lineNumber).cgColor
+        label.layer.backgroundColor = UIColor.setColor(lineNumber: self.lineNumber).cgColor
         label.layer.cornerRadius = 10.0
         label.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
 
@@ -61,7 +61,7 @@ final class StationInfoSectionView: UIView {
     
     init(stationInfo: StationInfoData.Station) {
         self.stationInfo = stationInfo
-        self.lineNumber = Int(stationInfo.stationLineNumber.suffix(2))!
+        self.lineNumber = stationInfo.stationCode / 100
         super.init(frame: .zero)
         
         self.setUp()
@@ -103,7 +103,7 @@ struct StationInfoSectionView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            StationInfoSectionView(stationInfo: StationInfoData.Station(stationName: "사당", stationLineNumber: "1002", beforeStationName: "낙성대", afterStationName: "방배"))
+            StationInfoSectionView(stationInfo: StationInfoData.Station(stationCode: 226, stationName: "사당", beforeStationName: "낙성대", afterStationName: "방배", stationLineCode: "0226,0227"))
         }
         
         func updateUIView(_ uiView: UIViewType, context: Context) {}

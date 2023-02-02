@@ -10,7 +10,7 @@ import SnapKit
 import SwiftUI
 import Alamofire
 
-final class StationDetailView: UIView {
+final class StationDetailView: UIViewController {
     private var stationCode: Int
     private var stationInfo: [StationInfoData.Station] = []
     private var realtimeArrivalList: [ArrivalData.RealTimeArrival] = []
@@ -25,7 +25,6 @@ final class StationDetailView: UIView {
         stackView.isLayoutMarginsRelativeArrangement = true
         
         let controlSectionView = ControlSectionView(lineList: stationLineInfoDataList)
-        controlSectionView.tag = 100
         let horizontalSeparatorView = HorizontalSeparatorView()
         let stationInfoSectionView = StationInfoSectionView(stationInfo: stationInfo[0])
         let arrivalSectionView = ArrivalSectionView()
@@ -43,15 +42,24 @@ final class StationDetailView: UIView {
     
     init(stationCode: Int) {
         self.stationCode = stationCode
-        super.init(frame: .zero)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        self.backgroundColor = .white
+        self.view.backgroundColor = .white
         self.fetchStationInfoData(complitionHandler: { [weak self] result in
             guard let self = self else { return }
 
             switch result {
             case let .success(result):
                 self.stationInfo = result.stationInfo
+                self.saveStationInfoData()
             case let .failure(error):
                 debugPrint(error.localizedDescription)
             }
@@ -60,25 +68,18 @@ final class StationDetailView: UIView {
                 switch result {
                 case let .success(result):
                     self.realtimeArrivalList = result.realtimeArrivalList
-                    self.saveData()
                 case let .failure(error):
                     debugPrint(error.localizedDescription)
-                    print(result)
-                    print("여기가 문제?")
                 }
                 self.setUp()
             })
         })
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(tapLineButton(_:)),
-                                               name: NSNotification.Name("tapLineButton"),
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(tapLineButton(_:)),
+//                                               name: NSNotification.Name("tapLineButton"),
+//                                               object: nil)
         
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func fetchStationInfoData(complitionHandler: @escaping (Result<StationInfoData, Error>) -> Void) {
@@ -123,30 +124,28 @@ final class StationDetailView: UIView {
             })
     }
     
-    private func saveData() {
-        let list: [Int] = self.realtimeArrivalList[0].lineList.components(separatedBy: ",").map { Int($0.suffix(2))! }
-        var isChecked: Bool = true
+    private func saveStationInfoData() {
+        let list: [String] = self.stationInfo[0].stationLineCode.components(separatedBy: ",")
         
-        for lineNumber in list {
-            let data = StationLineInfoData(lineNumber: lineNumber, isChecked: isChecked)
+        var isChecked: Bool
+        
+        for station in list {
+            isChecked = Int(station) == self.stationCode ? true : false
+            let data = StationLineInfoData(stationCode: station, isChecked: isChecked)
             self.stationLineInfoDataList.append(data)
-            isChecked = false
         }
     }
     
-    @objc private func tapLineButton(_ notification: Notification) {
-        guard let data = notification.object as? [StationLineInfoData] else { return }
-        self.stationLineInfoDataList = data
-        stackView.viewWithTag(100)?.removeFromSuperview()
-        let controlSectionView = ControlSectionView(lineList: stationLineInfoDataList)
-        stackView.addArrangedSubview(controlSectionView)
-        
-    }
+//    @objc private func tapLineButton(_ notification: Notification) {
+//        guard let stationCode = notification.object as? Int else { return }
+//
+//        self.stationCode = stationCode
+//    }
 }
 
 extension StationDetailView {
     func setUp() {
-        addSubview(stackView)
+        view.addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -170,13 +169,13 @@ struct StationDetailView_Previews: PreviewProvider {
         Container()
     }
 
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
+    struct Container: UIViewControllerRepresentable {
+        func makeUIViewController(context: Context) -> UIViewController {
             StationDetailView(stationCode: 150)
         }
         
-        func updateUIView(_ uiView: UIView, context: Context) {}
-
-        typealias UIViewType = UIView
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+        
+        typealias UIViewControllerType = UIViewController
     }
 }

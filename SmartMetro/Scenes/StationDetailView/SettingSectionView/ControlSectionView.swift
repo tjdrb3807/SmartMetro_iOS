@@ -20,20 +20,19 @@ final class ControlSectionView: UIView {
 
         for lineInfo in lineList {
             let button = UIButton()
-            let color = UIColor.setColor(lineNumber: lineInfo.lineNumber)
+            let color = UIColor.setColor(lineNumber: Int(lineInfo.stationCode.prefix(2))!)
             
             button.tintColor = color
-            button.tag = lineInfo.lineNumber
+            button.tag = Int(lineInfo.stationCode)!
             button.addTarget(self, action: #selector(tapLineButton(_:)), for: .touchUpInside)
             
             if lineInfo.isChecked {
-                button.setImage(systemName: "\(lineInfo.lineNumber).circle.fill")
+                button.setImage(systemName: "\(Int(lineInfo.stationCode.prefix(2))!).circle.fill")
                 // Tap 제스처 막기 필요
             } else {
-                button.setImage(systemName: "\(lineInfo.lineNumber).circle")
+                button.setImage(systemName: "\(Int(lineInfo.stationCode.prefix(2))!).circle")
             }
-            
-            //TODO: Button AddTarget() 구현
+
             stackView.addArrangedSubview(button)
         }
         
@@ -56,7 +55,6 @@ final class ControlSectionView: UIView {
     }()
     
     init(lineList: [StationLineInfoData]) {
-        print("call")
         self.lineList = lineList
         self.spacingViewCount = 10 - lineList.count
         super.init(frame: .zero)
@@ -68,18 +66,8 @@ final class ControlSectionView: UIView {
     }
     
     @objc private func tapLineButton(_ sender: UIButton) {
-        var editLineInfoList: [StationLineInfoData] = []
-        var isChecked: Bool
-        for data in lineList {
-            isChecked = data.lineNumber == sender.tag ? true : false
-            editLineInfoList.append(StationLineInfoData(lineNumber: data.lineNumber, isChecked: isChecked))
-        }
         NotificationCenter.default.post(name: NSNotification.Name("tapLineButton"),
-                                        object: editLineInfoList)
-    }
-    
-    func reloadData() {
-        print("hello")
+                                        object: sender.tag)
     }
 }
 
@@ -100,8 +88,8 @@ struct ControlSectionView_Previews: PreviewProvider {
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
             ControlSectionView(lineList: [
-                StationLineInfoData(lineNumber: 2, isChecked: true),
-                StationLineInfoData(lineNumber: 4, isChecked: false)
+                StationLineInfoData(stationCode: "0226", isChecked: true),
+                StationLineInfoData(stationCode: "0443", isChecked: false)
             ])
         }
         

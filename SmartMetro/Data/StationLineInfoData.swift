@@ -8,6 +8,6 @@
 import Foundation
 
 struct StationLineInfoData {
-    var lineNumber: Int
+    var stationCode: String
     var isChecked: Bool
 }

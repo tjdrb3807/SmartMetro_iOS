@@ -12,10 +12,11 @@ struct StationInfoData: Decodable {
     
     struct Station: Decodable {
         
+        let stationCode: Int
         let stationName: String
-        let stationLineNumber: String
         let beforeStationName: String
         let afterStationName: String
+        let stationLineCode: String
     }
     
     enum CodingKeys: String, CodingKey {
