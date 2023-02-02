@@ -35,16 +35,10 @@ final class MainViewController: UIViewController {
                                                object: nil)
     }
     
-//    private func presentStationDetailViewController(stationCode: Int) {
-//        let stationDetailVc = StationDetailView(stationCode: stationCode)
-//        stationDetailVc.modalPresentationStyle = .formSheet
-//        stationDetailVc.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
-//        self.present(stationDetailVc, animated: true, completion: nil)
-//    }
-    
     private func presentStationDetailViewController(stationCode: Int) {
         self.stationDetailViewController = StationDetailViewController(stationCode: stationCode)
         stationDetailViewController?.modalPresentationStyle = .formSheet
+        stationDetailViewController?.sheetPresentationController?.detents = [.medium()]
         stationDetailViewController?.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
         self.present(stationDetailViewController ?? UIViewController(), animated: false, completion: nil)
     }

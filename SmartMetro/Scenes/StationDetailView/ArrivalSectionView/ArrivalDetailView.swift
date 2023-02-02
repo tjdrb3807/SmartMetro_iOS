@@ -10,8 +10,12 @@ import SnapKit
 import SwiftUI
 
 final class ArrivalDetailView: UIView {
+    private var arrivalData: [ArrivalData.RealTimeArrival] = []
+
+    private let firstArrivalDirection: String
     private let firstArrivalDestination: String
     private let firstArrivalRealtime: String
+    private let secondArrivalDirection: String
     private let secondArrivalDestination: String
     private let secondArrivalRealtime: String
     
@@ -21,19 +25,23 @@ final class ArrivalDetailView: UIView {
         stackView.distribution = .fill
         stackView.alignment = .leading
         
-        let firstArrivalDataView = ArrivalDataView(destination: firstArrivalDestination, realtiem: firstArrivalRealtime)
-        let secondArrivalDataView = ArrivalDataView(destination: secondArrivalDestination, realtiem: secondArrivalRealtime)
+        let firstArrivalDataView = ArrivalDataView(direction: firstArrivalDirection, destination: firstArrivalDestination, realtiem: firstArrivalRealtime)
+        let secondArrivalDataView = ArrivalDataView(direction: secondArrivalDirection, destination: secondArrivalDestination, realtiem: secondArrivalRealtime)
         
         [firstArrivalDataView, secondArrivalDataView].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
     }()
     
-    init(firstArrivalDestination: String, firstArrivalRealtime: String, secondArrivalDestination: String, secondArrivalRealtime: String) {
-        self.firstArrivalDestination = firstArrivalDestination
-        self.firstArrivalRealtime = firstArrivalRealtime
-        self.secondArrivalDestination = secondArrivalDestination
-        self.secondArrivalRealtime = secondArrivalRealtime
+    init(arrivalData: [ArrivalData.RealTimeArrival]) {
+        self.arrivalData = arrivalData
+        self.firstArrivalDirection = arrivalData[0].direction
+        self.firstArrivalDestination = arrivalData[0].destination
+        self.firstArrivalRealtime = arrivalData[0].remainTime
+        
+        self.secondArrivalDirection = arrivalData[1].direction
+        self.secondArrivalDestination = arrivalData[1].destination
+        self.secondArrivalRealtime = arrivalData[1].remainTime
         
         super.init(frame: .zero)
         self.setUP()
@@ -66,7 +74,7 @@ struct ArrivalDetailView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            ArrivalDetailView(firstArrivalDestination: "상행선", firstArrivalRealtime: "곧 도착", secondArrivalDestination: "상행선", secondArrivalRealtime: "12분 후 도착")
+            ArrivalDetailView(arrivalData: [ArrivalData.RealTimeArrival(stationCode: "1004000226", direction: "외선", destination: "성수행 - 방배방면", remainTime: "사당 도착", stationLineNumber: "1002", lineList: "1002,1004")])
         }
         
         func updateUIView(_ uiView: UIViewType, context: Context) {}

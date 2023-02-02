@@ -10,13 +10,18 @@ import SnapKit
 import SwiftUI
 
 final class ArrivalSectionView: UIView {
+    private var realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival] = []
+    
+    private var northBoundLineDataList: [ArrivalData.RealTimeArrival] = []
+    private var southBoundLineDataList: [ArrivalData.RealTimeArrival] = []
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
         
-        let northBoundLineArrivalDetailView = ArrivalDetailView(firstArrivalDestination: "상행선", firstArrivalRealtime: "곧 도착", secondArrivalDestination: "상행성", secondArrivalRealtime: "12분 후 도착")
-        let southBoundLineArrivalDetailView = ArrivalDetailView(firstArrivalDestination: "하행선", firstArrivalRealtime: "2분 후 도착", secondArrivalDestination: "내부 순환선", secondArrivalRealtime: "8분 후 도착")
+        let northBoundLineArrivalDetailView = ArrivalDetailView(arrivalData: northBoundLineDataList)
+        let southBoundLineArrivalDetailView = ArrivalDetailView(arrivalData: southBoundLineDataList)
         southBoundLineArrivalDetailView.setContentCompressionResistancePriority(.defaultHigh ,for: .horizontal)
         let vertivalSeparatorView = VerticalSeparatorView()
         
@@ -25,13 +30,29 @@ final class ArrivalSectionView: UIView {
         return stackView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival]) {
+        self.realTimeArrivalInfoDataList = realTimeArrivalInfoDataList
+        super.init(frame: .zero)
+        
+        self.saveDestinationData()
         self.setUp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func saveDestinationData() {
+        for data in realTimeArrivalInfoDataList {
+            switch data.direction {
+            case "외선", "상행":
+                self.northBoundLineDataList.append(data)
+            case "내선", "하행":
+                self.southBoundLineDataList.append(data)
+            default:
+                break
+            }
+        }
     }
 }
 
@@ -57,18 +78,18 @@ private extension ArrivalSectionView {
     }
 }
 
-struct ArrivalSectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-    }
-    
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
-            ArrivalSectionView()
-        }
-        
-        func updateUIView(_ uiView: UIView, context: Context) {}
-        
-        typealias UIViewType = UIView
-    }
-}
+//struct ArrivalSectionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Container()
+//    }
+//    
+//    struct Container: UIViewRepresentable {
+//        func makeUIView(context: Context) -> UIView {
+//            ArrivalSectionView(realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival(stationCode: "1004000226", destination: "외선", remainTime: "사당 도착", stationLineNumber: "1002", lineList: "1002,1004")])
+//        }
+//        
+//        func updateUIView(_ uiView: UIView, context: Context) {}
+//        
+//        typealias UIViewType = UIView
+//    }
+//}

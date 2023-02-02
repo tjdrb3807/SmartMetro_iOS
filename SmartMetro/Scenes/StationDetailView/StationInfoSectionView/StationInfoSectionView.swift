@@ -29,7 +29,7 @@ final class StationInfoSectionView: UIView {
         return label
     }()
     
-    private lazy var beforeStationNameLabel: UILabel = {
+    private lazy var northBoundStationNameLabel: UILabel = {
         let label = UILabel()
         
         label.text = " ❮ \(stationInfo.beforeStationName)"
@@ -44,7 +44,7 @@ final class StationInfoSectionView: UIView {
         return label
     }()
     
-    private lazy var afterStationNameLabel: UILabel = {
+    private lazy var southBoundStationNameLabel: UILabel = {
         let label = UILabel()
         
         label.text = "\(stationInfo.afterStationName) ❯"
@@ -74,7 +74,7 @@ final class StationInfoSectionView: UIView {
 
 private extension StationInfoSectionView {
     func setUp() {
-        [beforeStationNameLabel, afterStationNameLabel, currentStationNameLabel].forEach { addSubview($0) }
+        [northBoundStationNameLabel, southBoundStationNameLabel, currentStationNameLabel].forEach { addSubview($0) }
         
         currentStationNameLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -82,13 +82,13 @@ private extension StationInfoSectionView {
             $0.height.equalTo(50.0)
         }
         
-        beforeStationNameLabel.snp.makeConstraints {
+        northBoundStationNameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.trailing.equalTo(currentStationNameLabel.snp.leading).offset(2.0)
             $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
         }
         
-        afterStationNameLabel.snp.makeConstraints {
+        southBoundStationNameLabel.snp.makeConstraints {
             $0.leading.equalTo(currentStationNameLabel.snp.trailing).offset(-2.0)
             $0.trailing.equalToSuperview()
             $0.centerY.equalTo(currentStationNameLabel.snp.centerY)
@@ -96,18 +96,18 @@ private extension StationInfoSectionView {
     }
 }
 
-struct StationInfoSectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-    }
-    
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
-            StationInfoSectionView(stationInfo: StationInfoData.Station(stationCode: 226, stationName: "사당", beforeStationName: "낙성대", afterStationName: "방배", stationLineCode: "0226,0227"))
-        }
-        
-        func updateUIView(_ uiView: UIViewType, context: Context) {}
-        
-        typealias UIViewType = UIView
-    }
-}
+//struct StationInfoSectionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Container()
+//    }
+//    
+//    struct Container: UIViewRepresentable {
+//        func makeUIView(context: Context) -> UIView {
+//            StationInfoSectionView(stationInfo: StationInfoData.Station(stationCode: 226, stationName: "사당", northBoundStationName: "낙성대", southBoundStationName: "방배", stationLineCode: "0226,0227"))
+//        }
+//        
+//        func updateUIView(_ uiView: UIViewType, context: Context) {}
+//        
+//        typealias UIViewType = UIView
+//    }
+//}

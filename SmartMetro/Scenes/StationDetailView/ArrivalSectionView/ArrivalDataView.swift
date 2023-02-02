@@ -10,6 +10,7 @@ import SnapKit
 import SwiftUI
 
 final class ArrivalDataView: UIView {
+    private let direction: String
     private let destination: String
     private let realtiem: String
     
@@ -20,7 +21,16 @@ final class ArrivalDataView: UIView {
         stackView.alignment = .center
 
         let destinationLabel = UILabel()
-        destinationLabel.text = self.destination + "  "
+//        destinationLabel.text = destinationText
+        switch self.direction {
+        case "상행", "하행":
+            destinationLabel.text = "\(destination)행 "
+        case "외선", "내선":
+            destinationLabel.text = "\(destination)(\(direction)) "
+        default:
+            break
+        }
+        
         destinationLabel.font = .systemFont(ofSize: 15.0, weight: .medium)
         
         let realtimeLabel = UILabel()
@@ -35,12 +45,12 @@ final class ArrivalDataView: UIView {
         return stackView
     }()
     
-    init(destination: String, realtiem: String) {
+    init(direction: String, destination: String, realtiem: String) {
+        self.direction = direction
         self.destination = destination
         self.realtiem = realtiem
         
         super.init(frame: .zero)
-        
         self.setUp()
     }
     
@@ -70,7 +80,7 @@ struct ArrivalDataView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            ArrivalDataView(destination: "상행선", realtiem: "12분 후 도착")
+            ArrivalDataView(direction: "상행", destination: "성수", realtiem: "12분 후 도착")
         }
         
         func updateUIView(_ uiView: UIView, context: Context) {}

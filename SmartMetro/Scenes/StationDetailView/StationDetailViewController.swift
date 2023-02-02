@@ -14,7 +14,9 @@ final class StationDetailViewController: UIViewController {
     private var stationCode: Int
     private var stationInfo: [StationInfoData.Station] = []
     private var realtimeArrivalList: [ArrivalData.RealTimeArrival] = []
+    
     private var stationLineInfoDataList: [StationLineInfoData] = []
+    private var realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival] = []
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -27,7 +29,7 @@ final class StationDetailViewController: UIViewController {
         let controlSectionView = ControlSectionView(lineList: stationLineInfoDataList)
         let horizontalSeparatorView = HorizontalSeparatorView()
         let stationInfoSectionView = StationInfoSectionView(stationInfo: stationInfo[0])
-        let arrivalSectionView = ArrivalSectionView()
+        let arrivalSectionView = ArrivalSectionView(realTimeArrivalInfoDataList: realTimeArrivalInfoDataList)
         let spacingView = UIView()
 
         [controlSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView, spacingView].forEach { stackView.addArrangedSubview($0) }
@@ -68,18 +70,13 @@ final class StationDetailViewController: UIViewController {
                 switch result {
                 case let .success(result):
                     self.realtimeArrivalList = result.realtimeArrivalList
+                    self.saveRealTiemArrivalData()
                 case let .failure(error):
                     debugPrint(error.localizedDescription)
                 }
                 self.setUp()
             })
         })
-        
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(tapLineButton(_:)),
-//                                               name: NSNotification.Name("tapLineButton"),
-//                                               object: nil)
-        
     }
     
     private func fetchStationInfoData(complitionHandler: @escaping (Result<StationInfoData, Error>) -> Void) {
@@ -105,7 +102,7 @@ final class StationDetailViewController: UIViewController {
     }
     
     private func fetchStationArrivalData(complitionHandler: @escaping (Result<ArrivalData, Error>) -> Void) {
-        let url = "http://swopenAPI.seoul.go.kr/api/subway/584c557a7a746a64313238637a596343/json/realtimeStationArrival/0/1/\(self.stationInfo[0].stationName)"
+        let url = "http://swopenAPI.seoul.go.kr/api/subway/584c557a7a746a64313238637a596343/json/realtimeStationArrival/0/25/\(self.stationInfo[0].stationName)"
         
         AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "", method: .get)
             .responseData(completionHandler: { response in
@@ -136,11 +133,13 @@ final class StationDetailViewController: UIViewController {
         }
     }
     
-//    @objc private func tapLineButton(_ notification: Notification) {
-//        guard let stationCode = notification.object as? Int else { return }
-//
-//        self.stationCode = stationCode
-//    }
+    private func saveRealTiemArrivalData() {
+        for data in self.realtimeArrivalList {
+            if Int(data.stationCode.suffix(4))! == self.stationCode {
+                self.realTimeArrivalInfoDataList.append(data)
+            }
+        }
+    }
 }
 
 extension StationDetailViewController {
