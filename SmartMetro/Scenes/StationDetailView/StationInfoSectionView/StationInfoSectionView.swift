@@ -62,6 +62,7 @@ final class StationInfoSectionView: UIView {
     init(stationInfo: StationInfoData.Station) {
         self.stationInfo = stationInfo
         self.lineNumber = stationInfo.stationCode / 100
+        print(stationInfo)
         super.init(frame: .zero)
         
         self.setUp()
@@ -95,19 +96,3 @@ private extension StationInfoSectionView {
         }
     }
 }
-
-//struct StationInfoSectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Container()
-//    }
-//    
-//    struct Container: UIViewRepresentable {
-//        func makeUIView(context: Context) -> UIView {
-//            StationInfoSectionView(stationInfo: StationInfoData.Station(stationCode: 226, stationName: "사당", northBoundStationName: "낙성대", southBoundStationName: "방배", stationLineCode: "0226,0227"))
-//        }
-//        
-//        func updateUIView(_ uiView: UIViewType, context: Context) {}
-//        
-//        typealias UIViewType = UIView
-//    }
-//}

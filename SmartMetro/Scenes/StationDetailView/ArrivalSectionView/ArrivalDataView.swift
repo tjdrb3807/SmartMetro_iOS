@@ -72,19 +72,3 @@ private extension ArrivalDataView {
         stackView.arrangedSubviews[1].setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 }
-
-struct ArrivalDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-    }
-    
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
-            ArrivalDataView(direction: "상행", destination: "성수", realtiem: "12분 후 도착")
-        }
-        
-        func updateUIView(_ uiView: UIView, context: Context) {}
-        
-        typealias UIViewType = UIView
-    }
-}

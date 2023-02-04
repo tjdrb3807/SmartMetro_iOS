@@ -33,20 +33,3 @@ final class VerticalSeparatorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-struct VertivalSeparatorView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-            .edgesIgnoringSafeArea(.all)
-    }
-    
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
-            VerticalSeparatorView()
-        }
-        
-        func updateUIView(_ uiView: UIView, context: Context) {}
-        
-        typealias UIViewType = UIView
-    }
-}

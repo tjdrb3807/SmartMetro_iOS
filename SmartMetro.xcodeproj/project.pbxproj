@@ -16,7 +16,7 @@
 		4535863A29729A0300B586E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4535863829729A0300B586E5 /* LaunchScreen.storyboard */; };
 		455B5BB729729A88001A9F80 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BB629729A88001A9F80 /* MainViewController.swift */; };
 		455B5BBB29729BA7001A9F80 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 455B5BBA29729BA7001A9F80 /* SnapKit */; };
-		455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */; };
+		455B5BBD2972A04A001A9F80 /* StationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5BBC2972A04A001A9F80 /* StationDetailView.swift */; };
 		4562B75529767CE50033CC84 /* StationInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B75429767CE50033CC84 /* StationInfoData.swift */; };
 		4562B788297923C70033CC84 /* ArrivalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B787297923C70033CC84 /* ArrivalData.swift */; };
 		4562B78A297930780033CC84 /* ControlSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562B789297930780033CC84 /* ControlSectionView.swift */; };
@@ -43,7 +43,7 @@
 		4535863929729A0300B586E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4535863B29729A0300B586E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		455B5BB629729A88001A9F80 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		455B5BBC2972A04A001A9F80 /* StationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailView.swift; sourceTree = "<group>"; };
 		4562B75429767CE50033CC84 /* StationInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInfoData.swift; sourceTree = "<group>"; };
 		4562B787297923C70033CC84 /* ArrivalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalData.swift; sourceTree = "<group>"; };
 		4562B789297930780033CC84 /* ControlSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlSectionView.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		4562B78B2979307D0033CC84 /* StationDetailView */ = {
 			isa = PBXGroup;
 			children = (
-				455B5BBC2972A04A001A9F80 /* StationDetailViewController.swift */,
+				455B5BBC2972A04A001A9F80 /* StationDetailView.swift */,
 				4562B78C297938690033CC84 /* HorizontalSeparatorView.swift */,
 				45FDA7E929827E810095AC97 /* UIColor+.swift */,
 				453F30A02985404100231488 /* ArrivalSectionView */,
@@ -304,7 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4562B75529767CE50033CC84 /* StationInfoData.swift in Sources */,
-				455B5BBD2972A04A001A9F80 /* StationDetailViewController.swift in Sources */,
+				455B5BBD2972A04A001A9F80 /* StationDetailView.swift in Sources */,
 				45FDA7EC2982AABE0095AC97 /* VerticalSeparatorView.swift in Sources */,
 				4562B78D297938690033CC84 /* HorizontalSeparatorView.swift in Sources */,
 				4580306529839D95005E161E /* ArrivalSectionView.swift in Sources */,

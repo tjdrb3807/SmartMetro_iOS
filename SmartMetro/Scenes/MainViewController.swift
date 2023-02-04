@@ -11,9 +11,9 @@ import SwiftUI
 import Alamofire
 
 final class MainViewController: UIViewController {
-    
     private lazy var mapView = MapView()
-    private var stationDetailViewController: StationDetailViewController?
+    
+    private var stationDetailView: StationDetailView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,40 +23,28 @@ final class MainViewController: UIViewController {
                                                selector: #selector(tapStationButton(_:)),
                                                name: NSNotification.Name("tapStationButton"),
                                                object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(tapLineButton(_:)),
-                                               name: NSNotification.Name("tapLineButton"),
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(popStationDetailVC(_:)),
-                                               name: NSNotification.Name("tapPopButton"),
-                                               object: nil)
     }
     
-    private func presentStationDetailViewController(stationCode: Int) {
-        self.stationDetailViewController = StationDetailViewController(stationCode: stationCode)
-        stationDetailViewController?.modalPresentationStyle = .formSheet
-        stationDetailViewController?.sheetPresentationController?.detents = [.medium()]
-        stationDetailViewController?.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
-        self.present(stationDetailViewController ?? UIViewController(), animated: false, completion: nil)
+    private func presentStationDetailView(stationCode: Int) {
+        self.stationDetailView = StationDetailView(stationCode: stationCode)
+        view.addSubview(stationDetailView!)
+        stationDetailView?.tag = 100
+        stationDetailView!.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
     
     @objc private func tapStationButton(_ notification: Notification) {
         guard let stationCode = notification.object as? Int else { return }
-        self.presentStationDetailViewController(stationCode: stationCode)
-    }
-    
-    @objc private func tapLineButton(_ notification: Notification) {
-        guard let stationCode = notification.object as? Int else { return }
         
-        self.stationDetailViewController?.dismiss(animated: false)
-        self.presentStationDetailViewController(stationCode: stationCode)
-    }
-    
-    @objc private func popStationDetailVC(_ notification: Notification) {
-        self.stationDetailViewController?.dismiss(animated: true)
+        if stationDetailView == nil {
+            self.presentStationDetailView(stationCode: stationCode)
+        } else {
+            let stationDetailViewTag = self.view.viewWithTag(100)
+            stationDetailViewTag?.removeFromSuperview()
+            self.presentStationDetailView(stationCode: stationCode)
+        }
     }
 }
 

@@ -91,6 +91,10 @@ final class MapView: UIView {
     }
     
     @objc private func tapStationButton(_ sender: UIButton) {
+        let x = sender.frame.origin.x - (UIScreen.main.bounds.width / 2)
+        let y = sender.frame.origin.y - (UIScreen.main.bounds.height / 2)
+        self.scrollView.contentOffset = CGPoint.init(x: x, y: y)
+        
         NotificationCenter.default.post(name: NSNotification.Name("tapStationButton"),
                                         object: sender.tag)
     }
@@ -118,19 +122,3 @@ private extension MapView {
     }
 }
 
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-            .edgesIgnoringSafeArea(.all)
-    }
-    
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
-            MapView()
-        }
-        
-        func updateUIView(_ uiView: UIView, context: Context) {}
-        
-        typealias UIViewType = UIView
-    }
-}

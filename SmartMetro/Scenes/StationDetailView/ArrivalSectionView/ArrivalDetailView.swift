@@ -67,18 +67,3 @@ extension ArrivalDetailView {
     }
 }
 
-struct ArrivalDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container()
-    }
-    
-    struct Container: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIView {
-            ArrivalDetailView(arrivalData: [ArrivalData.RealTimeArrival(stationCode: "1004000226", direction: "외선", destination: "성수행 - 방배방면", remainTime: "사당 도착", stationLineNumber: "1002", lineList: "1002,1004")])
-        }
-        
-        func updateUIView(_ uiView: UIViewType, context: Context) {}
-        
-        typealias UIViewType = UIView
-    }
-}

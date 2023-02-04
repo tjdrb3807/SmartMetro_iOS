@@ -32,6 +32,7 @@ final class ArrivalSectionView: UIView {
     
     init(realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival]) {
         self.realTimeArrivalInfoDataList = realTimeArrivalInfoDataList
+        print(self.realTimeArrivalInfoDataList)
         super.init(frame: .zero)
         
         self.saveDestinationData()
@@ -77,19 +78,3 @@ private extension ArrivalSectionView {
         }
     }
 }
-
-//struct ArrivalSectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Container()
-//    }
-//    
-//    struct Container: UIViewRepresentable {
-//        func makeUIView(context: Context) -> UIView {
-//            ArrivalSectionView(realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival(stationCode: "1004000226", destination: "외선", remainTime: "사당 도착", stationLineNumber: "1002", lineList: "1002,1004")])
-//        }
-//        
-//        func updateUIView(_ uiView: UIView, context: Context) {}
-//        
-//        typealias UIViewType = UIView
-//    }
-//}
