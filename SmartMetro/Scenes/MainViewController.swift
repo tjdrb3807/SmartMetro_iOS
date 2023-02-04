@@ -27,8 +27,13 @@ final class MainViewController: UIViewController {
         self.setUp()
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(tapStationButton(_:)),
+                                               selector: #selector(reloadStationDetailViewAndData(_:)),
                                                name: NSNotification.Name("tapStationOrLineButton"),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(dismissStationDetailView),
+                                               name: NSNotification.Name("tapDismissButtonOrImageView"),
                                                object: nil)
     }
     
@@ -106,7 +111,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @objc private func tapStationButton(_ notification: Notification) {
+    @objc private func reloadStationDetailViewAndData(_ notification: Notification) {
         guard let stationCode = notification.object as? Int else { return }
         self.stationCode = stationCode
         
@@ -138,6 +143,12 @@ final class MainViewController: UIViewController {
                 debugPrint(error.localizedDescription)
             }
         })
+    }
+    
+    @objc private func dismissStationDetailView(_ notification: Notification) {
+        if self.stationDetailView != nil {
+            self.stationDetailView?.removeFromSuperview()
+        }
     }
 }
 

@@ -41,6 +41,8 @@ final class MapView: UIView {
         let image = UIImage(imageLiteralResourceName: "img_metro")
         
         imageView.image = image
+        let recoginer = UITapGestureRecognizer(target: self, action: #selector(tapImageView))
+        imageView.addGestureRecognizer(recoginer)
         imageView.isUserInteractionEnabled = true
         
         return imageView
@@ -97,6 +99,11 @@ final class MapView: UIView {
         
         NotificationCenter.default.post(name: NSNotification.Name("tapStationOrLineButton"),
                                         object: sender.tag)
+    }
+    
+    @objc private func tapImageView(_sender: UIImageView) {
+        NotificationCenter.default.post(name: NSNotification.Name("tapDismissButtonOrImageView"),
+                                        object: nil)
     }
 }
 

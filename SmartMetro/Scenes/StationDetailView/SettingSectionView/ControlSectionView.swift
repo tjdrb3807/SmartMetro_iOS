@@ -46,10 +46,11 @@ final class ControlSectionView: UIView {
         let dataReloadButton = UIButton()
         dataReloadButton.setImage(systemName: "arrow.triangle.2.circlepath")
 
-        let popButton = UIButton()
-        popButton.setImage(systemName: "xmark")
+        let dismissButton = UIButton()
+        dismissButton.setImage(systemName: "xmark")
+        dismissButton.addTarget(self, action: #selector(tapDismissButton(_:)), for: .touchUpInside)
 
-        [dataReloadButton, popButton].forEach { stackView.addArrangedSubview($0) }
+        [dataReloadButton, dismissButton].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
     
@@ -67,6 +68,11 @@ final class ControlSectionView: UIView {
     @objc private func tapLineButton(_ sender: UIButton) {
         NotificationCenter.default.post(name: NSNotification.Name("tapStationOrLineButton"),
                                         object: sender.tag)
+    }
+    
+    @objc private func tapDismissButton(_ sender: UIButton) {
+        NotificationCenter.default.post(name: NSNotification.Name("tapDismissButtonOrImageView"),
+                                        object: nil)
     }
 }
 
