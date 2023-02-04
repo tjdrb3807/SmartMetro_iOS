@@ -39,9 +39,9 @@ final class MapView: UIView {
     private lazy var metroMapImageView: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(imageLiteralResourceName: "img_metro")
+        let recoginer = UITapGestureRecognizer(target: self, action: #selector(tapImageView))
         
         imageView.image = image
-        let recoginer = UITapGestureRecognizer(target: self, action: #selector(tapImageView))
         imageView.addGestureRecognizer(recoginer)
         imageView.isUserInteractionEnabled = true
         
