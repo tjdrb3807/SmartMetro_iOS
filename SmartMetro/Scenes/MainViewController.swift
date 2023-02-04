@@ -93,6 +93,8 @@ final class MainViewController: UIViewController {
     }
     
     private func refineArrivalSectionViewData() {
+        if !self.arrivalSectionViewData.isEmpty { self.arrivalSectionViewData.removeAll() }
+        
         for data in self.realtimeArrivalList {
             if Int(data.stationCode.suffix(4))! == self.stationCode {
                 self.arrivalSectionViewData.append(data)

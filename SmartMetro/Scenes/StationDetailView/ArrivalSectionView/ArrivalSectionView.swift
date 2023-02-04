@@ -32,6 +32,8 @@ final class ArrivalSectionView: UIView {
     
     init(arrivalSectionViewData: [ArrivalData.RealTimeArrival]) {
         self.arrivalSectionViewData = arrivalSectionViewData
+        
+        print(self.arrivalSectionViewData)
         super.init(frame: .zero)
         
         self.saveDestinationData()
