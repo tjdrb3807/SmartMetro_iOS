@@ -95,7 +95,7 @@ final class MapView: UIView {
         let y = sender.frame.origin.y - (UIScreen.main.bounds.height / 2)
         self.scrollView.contentOffset = CGPoint.init(x: x, y: y)
         
-        NotificationCenter.default.post(name: NSNotification.Name("tapStationButton"),
+        NotificationCenter.default.post(name: NSNotification.Name("tapStationOrLineButton"),
                                         object: sender.tag)
     }
 }

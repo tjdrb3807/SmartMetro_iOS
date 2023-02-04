@@ -10,13 +10,13 @@ import SnapKit
 import SwiftUI
 
 final class StationInfoSectionView: UIView {
-    private let stationInfo: StationInfoData.Station
+    private let stationInfoSectionViewData: StationInfoData.Station
     private var lineNumber: Int
     
     private lazy var currentStationNameLabel: UILabel = {
         let label = UILabel()
     
-        label.text = stationInfo.stationName
+        label.text = stationInfoSectionViewData.stationName
         label.textAlignment = .center
         label.numberOfLines = 1
         label.textColor = .black
@@ -32,7 +32,7 @@ final class StationInfoSectionView: UIView {
     private lazy var northBoundStationNameLabel: UILabel = {
         let label = UILabel()
         
-        label.text = " ❮ \(stationInfo.beforeStationName)"
+        label.text = " ❮ \(stationInfoSectionViewData.beforeStationName)"
         label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = .white
@@ -47,7 +47,7 @@ final class StationInfoSectionView: UIView {
     private lazy var southBoundStationNameLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "\(stationInfo.afterStationName) ❯"
+        label.text = "\(stationInfoSectionViewData.afterStationName) ❯"
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14.0)
         label.textAlignment = .right
@@ -59,10 +59,9 @@ final class StationInfoSectionView: UIView {
         return label
     }()
     
-    init(stationInfo: StationInfoData.Station) {
-        self.stationInfo = stationInfo
-        self.lineNumber = stationInfo.stationCode / 100
-        print(stationInfo)
+    init(stationInfoSectionViewData: StationInfoData.Station) {
+        self.stationInfoSectionViewData = stationInfoSectionViewData
+        self.lineNumber = stationInfoSectionViewData.stationCode / 100
         super.init(frame: .zero)
         
         self.setUp()

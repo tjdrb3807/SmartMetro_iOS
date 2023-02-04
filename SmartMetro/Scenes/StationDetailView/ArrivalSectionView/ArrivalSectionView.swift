@@ -10,7 +10,7 @@ import SnapKit
 import SwiftUI
 
 final class ArrivalSectionView: UIView {
-    private var realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival] = []
+    private var arrivalSectionViewData: [ArrivalData.RealTimeArrival] = []
     
     private var northBoundLineDataList: [ArrivalData.RealTimeArrival] = []
     private var southBoundLineDataList: [ArrivalData.RealTimeArrival] = []
@@ -30,9 +30,8 @@ final class ArrivalSectionView: UIView {
         return stackView
     }()
     
-    init(realTimeArrivalInfoDataList: [ArrivalData.RealTimeArrival]) {
-        self.realTimeArrivalInfoDataList = realTimeArrivalInfoDataList
-        print(self.realTimeArrivalInfoDataList)
+    init(arrivalSectionViewData: [ArrivalData.RealTimeArrival]) {
+        self.arrivalSectionViewData = arrivalSectionViewData
         super.init(frame: .zero)
         
         self.saveDestinationData()
@@ -44,7 +43,7 @@ final class ArrivalSectionView: UIView {
     }
     
     private func saveDestinationData() {
-        for data in realTimeArrivalInfoDataList {
+        for data in arrivalSectionViewData {
             switch data.direction {
             case "외선", "상행":
                 self.northBoundLineDataList.append(data)

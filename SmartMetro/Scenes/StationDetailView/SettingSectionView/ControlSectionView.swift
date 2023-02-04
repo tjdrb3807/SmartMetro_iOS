@@ -10,7 +10,7 @@ import SnapKit
 import SwiftUI
 
 final class ControlSectionView: UIView {
-    private var lineList: [StationLineInfoData] // Max: 10개
+    private var controlSectionViewData: [StationLineInfoData] // Max: 10개
     private var spacingViewCount: Int
     
     private lazy var stackView: UIStackView = {
@@ -18,19 +18,18 @@ final class ControlSectionView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
 
-        for lineInfo in lineList {
+        for data in controlSectionViewData {
             let button = UIButton()
-            let color = UIColor.setColor(lineNumber: Int(lineInfo.stationCode.prefix(2))!)
+            let color = UIColor.setColor(lineNumber: Int(data.stationCode.prefix(2))!)
             
             button.tintColor = color
-            button.tag = Int(lineInfo.stationCode)!
-            button.addTarget(self, action: #selector(tapLineButton(_:)), for: .touchUpInside)
+            button.tag = Int(data.stationCode)!
             
-            if lineInfo.isChecked {
-                button.setImage(systemName: "\(Int(lineInfo.stationCode.prefix(2))!).circle.fill")
-                // Tap 제스처 막기 필요
+            if data.isChecked {
+                button.setImage(systemName: "\(Int(data.stationCode.prefix(2))!).circle.fill")
             } else {
-                button.setImage(systemName: "\(Int(lineInfo.stationCode.prefix(2))!).circle")
+                button.setImage(systemName: "\(Int(data.stationCode.prefix(2))!).circle")
+                button.addTarget(self, action: #selector(tapLineButton(_:)), for: .touchUpInside)
             }
 
             stackView.addArrangedSubview(button)
@@ -54,10 +53,9 @@ final class ControlSectionView: UIView {
         return stackView
     }()
     
-    init(lineList: [StationLineInfoData]) {
-        self.lineList = lineList
-        print(self.lineList)
-        self.spacingViewCount = 10 - lineList.count
+    init(controlSectionViewData: [StationLineInfoData]) {
+        self.controlSectionViewData = controlSectionViewData
+        self.spacingViewCount = 10 - controlSectionViewData.count
         super.init(frame: .zero)
         self.setUp()
     }
@@ -67,7 +65,7 @@ final class ControlSectionView: UIView {
     }
     
     @objc private func tapLineButton(_ sender: UIButton) {
-        NotificationCenter.default.post(name: NSNotification.Name("tapLineButton"),
+        NotificationCenter.default.post(name: NSNotification.Name("tapStationOrLineButton"),
                                         object: sender.tag)
     }
 }
@@ -88,7 +86,7 @@ struct ControlSectionView_Previews: PreviewProvider {
     
     struct Container: UIViewRepresentable {
         func makeUIView(context: Context) -> UIView {
-            ControlSectionView(lineList: [
+            ControlSectionView(controlSectionViewData: [
                 StationLineInfoData(stationCode: "0226", isChecked: true),
                 StationLineInfoData(stationCode: "0443", isChecked: false)
             ])
