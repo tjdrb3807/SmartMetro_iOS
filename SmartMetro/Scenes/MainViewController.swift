@@ -27,7 +27,7 @@ final class MainViewController: UIViewController {
         self.setUp()
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(reloadStationDetailViewAndData(_:)),
+                                               selector: #selector(loadStationDetailViewAndData(_:)),
                                                name: NSNotification.Name("tapStationOrLineButton"),
                                                object: nil)
         
@@ -79,6 +79,27 @@ final class MainViewController: UIViewController {
             })
     }
     
+    private func fetchCongestionData(complitionHandler: @escaping (Result<CongestionData, Error>) -> Void) {
+        let url = "https://apis.openapi.sk.com/puzzle/congestion-train/rltm/trains/2/2312"
+        
+        AF.request(url, method: .get, headers: ["appkey": "l7xx1b38d2cbed974e80ab4f77d768fb5693"])
+            .responseData(completionHandler: { response in
+                switch response.result {
+                case let .success(data):
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode(CongestionData.self, from: data)
+                        complitionHandler(.success(result))
+                    } catch {
+                        complitionHandler(.failure(error))
+                    }
+                case let .failure(error):
+                    complitionHandler(.failure(error))
+                }
+            })
+    }
+    
+    
     private func refineControlSectionViewData() {
         let list: [String] = self.stationInfoSectionViewData[0].stationLineCode.components(separatedBy: ",")
         var isChecked: Bool
@@ -113,7 +134,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @objc private func reloadStationDetailViewAndData(_ notification: Notification) {
+    @objc private func loadStationDetailViewAndData(_ notification: Notification) {
         guard let stationCode = notification.object as? Int else { return }
         self.stationCode = stationCode
         
@@ -129,6 +150,25 @@ final class MainViewController: UIViewController {
                     case let .success(result):
                         self.realtimeArrivalList = result.realtimeArrivalList
                         self.refineArrivalSectionViewData()
+                        /*
+                        if stationCode == 2, 3 {
+                            실시간 혼잡도 API가져오는 함수 호출
+                            실시간 혼잡도까지 묶어서 argumanet로 statonDetailView 호출
+                         } else {
+                            기존 방법대로 presentStationDetailView 함수 호출
+                         
+                         */
+                        let lineNumber = self.stationCode / 100
+                        if lineNumber == 2 || lineNumber == 3 {
+                            self.fetchCongestionData(complitionHandler: { result in
+                                switch result {
+                                case let .success(result):
+                                    print(self.arrivalSectionViewData)
+                                case let .failure(error):
+                                    debugPrint(error.localizedDescription)
+                                }
+                            })
+                        }
                         
                         if self.stationDetailView == nil {
                             self.presentStationDetailView(stationCode: stationCode)

@@ -15,6 +15,7 @@ struct ArrivalData: Decodable {
         let direction: String
         let destination: String
         let remainTime: String
+        let trainNumber: String
         let stationLineNumber: String
         let lineList: String
         
@@ -23,6 +24,7 @@ struct ArrivalData: Decodable {
             case direction = "updnLine"
             case destination = "bstatnNm"
             case remainTime = "arvlMsg2"
+            case trainNumber = "btrainNo"
             case stationLineNumber = "subwayId"
             case lineList = "subwayList"
         }

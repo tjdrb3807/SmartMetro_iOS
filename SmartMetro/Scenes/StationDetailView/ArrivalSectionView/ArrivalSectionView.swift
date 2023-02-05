@@ -22,8 +22,9 @@ final class ArrivalSectionView: UIView {
         
         let northBoundLineArrivalDetailView = ArrivalDetailView(arrivalData: northBoundLineDataList)
         let southBoundLineArrivalDetailView = ArrivalDetailView(arrivalData: southBoundLineDataList)
-        southBoundLineArrivalDetailView.setContentCompressionResistancePriority(.defaultHigh ,for: .horizontal)
         let vertivalSeparatorView = VerticalSeparatorView()
+        
+        southBoundLineArrivalDetailView.setContentCompressionResistancePriority(.defaultHigh ,for: .horizontal)
         
         [northBoundLineArrivalDetailView, vertivalSeparatorView, southBoundLineArrivalDetailView].forEach { stackView.addArrangedSubview($0) }
         
@@ -32,8 +33,6 @@ final class ArrivalSectionView: UIView {
     
     init(arrivalSectionViewData: [ArrivalData.RealTimeArrival]) {
         self.arrivalSectionViewData = arrivalSectionViewData
-        
-        print(self.arrivalSectionViewData)
         super.init(frame: .zero)
         
         self.saveDestinationData()
