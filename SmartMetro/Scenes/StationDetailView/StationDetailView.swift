@@ -13,6 +13,13 @@ class StationDetailView: UIView {
     private var controlSectionViewData: [StationLineInfoData]
     private var stationInfoSectionViewData: [StationInfoData.Station]
     private var arrivalSectionViewData: [ArrivalData.RealTimeArrival]
+    
+    private lazy var 실시간뷰: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        
+        return view
+    }()
         
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -26,9 +33,8 @@ class StationDetailView: UIView {
         let horizontalSeparatorView = HorizontalSeparatorView()
         let stationInfoSectionView = StationInfoSectionView(stationInfoSectionViewData: stationInfoSectionViewData[0])
         let arrivalSectionView = ArrivalSectionView(arrivalSectionViewData: arrivalSectionViewData)
-        let spacingView = UIView()
 
-        [controlSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView, spacingView].forEach { stackView.addArrangedSubview($0) }
+        [controlSectionView, horizontalSeparatorView, stationInfoSectionView, arrivalSectionView].forEach { stackView.addArrangedSubview($0) }
     
         stackView.setCustomSpacing(8.0, after: controlSectionView)
         stackView.setCustomSpacing(8.0, after: horizontalSeparatorView)
@@ -46,10 +52,27 @@ class StationDetailView: UIView {
         backgroundColor = .white
         
         self.setUp()
+        // SettingSectionView에 위치하는 실시간 혼잡도 버튼에 대한 NotificationCenter 구현
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(뷰바꿔야댐),
+                                               name: NSNotification.Name("눌름"),
+                                               object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // NotificationCenter
+    // 눌렸어 stack[3]을 바꿔치지 해야댐
+    
+    @objc private func 뷰바꿔야댐() {
+        print("call")
+        self.stackView.arrangedSubviews[3].removeFromSuperview()
+        self.stackView.addArrangedSubview(실시간뷰)
+        실시간뷰.snp.makeConstraints {
+            $0.height.equalTo(40.0)
+        }
     }
 }
 
