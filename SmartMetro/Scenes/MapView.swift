@@ -52,8 +52,6 @@ final class MapView: UIView {
     private lazy var sadangButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 653.0, y: 687.0, width: 30, height: 30))
         button.backgroundColor = .clear
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1.0
         button.tag = 226 // 사당역 코드
         button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         
@@ -63,8 +61,6 @@ final class MapView: UIView {
     private lazy var bangbaeButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 682.0, y: 687.0, width: 25.0, height: 30))
         button.backgroundColor = .clear
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1.0
         button.tag = 225 // 방배역 코드
         button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         
@@ -74,8 +70,6 @@ final class MapView: UIView {
     private lazy var leeSuButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 655.0, y: 640.0, width: 30.0, height: 30))
         button.backgroundColor = .clear
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1.0
         button.tag = 432 // 방배역 코드
         button.addTarget(self, action: #selector(tapStationButton(_:)), for: .touchUpInside)
         

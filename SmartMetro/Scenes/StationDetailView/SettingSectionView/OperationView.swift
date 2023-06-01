@@ -12,13 +12,14 @@ import SwiftUI
 final class OperationView: UIView {
     private lazy var congestionButton: UIButton = {
         let button = UIButton()
+        
         button.setTitle("혼잡도", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12.0, weight: .medium)
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1.0
         button.layer.cornerRadius = 5.0
-        button.addTarget(self, action: #selector(tapCongestionButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapCongestionButton(_:)), for: .touchUpInside)
         
         return button
     }()
@@ -49,7 +50,6 @@ final class OperationView: UIView {
     }
     
     @objc private func tapCongestionButton(_ sender: UIButton) {
-
     }
     
     @objc private func tapDismissButton(_ sender: UIButton) {
